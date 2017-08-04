@@ -9,8 +9,14 @@ namespace Bangazon
         static void Main(string[] args)
         {
             // Seed the database if none exists
-            var db = new DatabaseInterface();
-            db.VerifyDataExists();
+            var db = new DatabaseInterface("BANGAZON_TEST_DB");
+            db.CheckCustomerTable();
+            db.CheckOrderTable();
+            db.CheckPaymentTypeTable();
+            db.CheckProductTable();
+            db.CheckProductTypeTable();
+            db.CheckProdOrderTable();
+            //db.VerifyDataExists();
 
             // Present the main menu
             Console.WriteLine ("*************************************************");
