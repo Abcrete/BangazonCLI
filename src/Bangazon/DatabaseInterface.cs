@@ -146,9 +146,8 @@ namespace Bangazon
                     Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table order (
+                        dbcmd.CommandText = $@"create table `order` (
                             `OrderID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                            `AccountNumber`	varchar(20) not null, 
                             `DateCreated` DATE DEFAULT (datetime('now','localtime')),
                             `CustomerID` integer not null,
                             `PaymentTypeID` integer not null,
@@ -328,7 +327,7 @@ namespace Bangazon
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
-                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        catch (Microsoft.Data.Sqlite.SqliteException)
                         {
                             Console.WriteLine("Table already exists. Ignoring");
                         }
