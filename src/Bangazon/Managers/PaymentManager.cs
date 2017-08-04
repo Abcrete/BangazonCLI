@@ -6,4 +6,7 @@ using Microsoft.Data.Sqlite;
 namespace Bangazon
 {
     public class PaymentManager
+    {
+        
+    }
 }

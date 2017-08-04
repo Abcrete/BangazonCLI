@@ -6,7 +6,7 @@ namespace Bangazon
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             // Seed the database if none exists
             var db = new DatabaseInterface("BANGAZON_TEST_DB");
