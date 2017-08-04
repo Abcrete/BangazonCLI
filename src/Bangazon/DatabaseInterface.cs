@@ -213,7 +213,7 @@ namespace Bangazon
             }
         }
 
-        public void ProdOrderTable ()
+        public void CheckProdOrderTable ()
         {
             using (_connection)
             {
