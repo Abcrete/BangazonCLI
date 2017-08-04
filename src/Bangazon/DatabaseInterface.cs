@@ -213,6 +213,46 @@ namespace Bangazon
             }
         }
 
+        public void ProdOrderTable ()
+        {
+            using (_connection)
+            {
+                _connection.Open();
+                SqliteCommand dbcmd = _connection.CreateCommand ();
+
+                // Query the ProdOrder table to see if table is created
+                dbcmd.CommandText = $"select OrderID,ProductID from ProdOrder";
+
+                try
+                {
+                    // Try to run the query. If it throws an exception, create the table
+                    using (SqliteDataReader reader = dbcmd.ExecuteReader()) { }
+                    dbcmd.Dispose ();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    if (ex.Message.Contains("no such table"))
+                    {
+                        dbcmd.CommandText = $@"create table ProdOrder (
+                            `OrderID`	integer NOT NULL,
+                            `ProductID`	integer NOT NULL
+                        )";
+                        try
+                        {
+                            dbcmd.ExecuteNonQuery ();
+                        }
+                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        {
+                            Console.WriteLine("Table already exists. Ignoring");
+                        }
+                        dbcmd.Dispose ();
+                    }
+                }
+                _connection.Close ();
+            }
+        }
+
         public void CheckProductTypeTable ()
         {
             using (_connection)
