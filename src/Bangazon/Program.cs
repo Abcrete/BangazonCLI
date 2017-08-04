@@ -50,7 +50,7 @@ namespace Bangazon
                 Console.WriteLine ("Enter customer phone number");
                 Console.Write ("> ");
                 string phoneNumber = Console.ReadLine();
-                CustomerManager manager = new CustomerManager();
+                CustomerManager manager = new CustomerManager(db);
             }
         }
     }

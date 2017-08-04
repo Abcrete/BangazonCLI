@@ -14,12 +14,12 @@ namespace Bangazon.Managers
     public class CustomerManager
     {
         private List<Customer> _customers = new List<Customer>();
-        private string _connectionString = $"Data Source = {Environment.GetEnvironmentVariable("BANGAZON_TEST_DB")}";
-        private SqliteConnection _connection;
 
-        public CustomerManager()
+        private DatabaseInterface _db;
+
+        public CustomerManager(DatabaseInterface db)
         {
-            _connection = new SqliteConnection(_connectionString);
+            _db = db;
         }
 
         // Method to Add a Customer to DataBase
@@ -28,46 +28,47 @@ namespace Bangazon.Managers
         // Authored by Tamela Lerma
         public int AddCustomer (string name, string streetAddress, string city, string state, string zip, string phone)
         {
-            int _lastId = 0; // int to Store the Last ID for object that is added
-
-            using (_connection)
-            {
-                _connection.Open();
-                SqliteCommand dbcmd = _connection.CreateCommand();
-
-                //Insert New Customer
-                dbcmd.CommandText = $"insert into Customer values(null, '{name}', '{streetAddress}', '{city}', '{state}', '{zip}', '{phone}')";
-                Console.WriteLine(dbcmd.CommandText);
-                dbcmd.ExecuteNonQuery();
-
-                // Return the ID of the new row
-                dbcmd.CommandText = $"select last_insert_rowid()";
-                using (SqliteDataReader dr = dbcmd.ExecuteReader())
+            int id = _db.Insert($"insert into Customer values(null, '{name}', '{streetAddress}', '{city}', '{state}', '{zip}', '{phone}')"); // int to Store the Last ID for object that is added
+            
+            _customers.Add(
+                new Customer()
                 {
-                    if(dr.Read()){
-                        _lastId = dr.GetInt32(0);
-                    }else {
-                        throw new Exception("Unable to insert value");
-                    }
-
-                    // remove from memory
-                    dbcmd.Dispose();
-                    _connection.Close();
+                    CustomerId = id,
+                    Name = name,
+                    StreetAddress = streetAddress,
+                    City = city,
+                    State = state,
+                    ZipCode = zip,
+                    Phone = phone
                 }
-            }
-            return _lastId;
+            );
+           
+            return id;
         }
 
         public List<Customer> GetCustomers ()
         {
-            foreach (var item in _customers)
-            {
-                Console.WriteLine($"item");
-                
-            }
+            _db.Query("select * from Customer", (SqliteDataReader reader) =>{
+                _customers.Clear();
+                while(reader.Read())
+                {
+                    _customers.Add(new Customer(){
+                        CustomerId = reader.GetInt32(0),
+                        Name =  reader[1].ToString(),
+                        StreetAddress = reader[2].ToString(),
+                        State = reader[3].ToString(),
+                        ZipCode = reader[4].ToString(),
+                        Phone = reader[6].ToString()
+                    });
+                }
+            });
+
             return _customers;
         }
 
+        // Method that accepts 1 argument which is CustomerId
+        // Returns a single type Customer from DB
+        // Authored by Tamela Lerma
         public Customer GetCustomer (int id) => _customers.SingleOrDefault(person => person.CustomerId == id);
     }
 }
