@@ -7,21 +7,20 @@ namespace Bangazon.Tests
 {
     public class CustomerManagerShould
     {
+        private readonly CustomerManager _register;
 
-        // private readonly RegisterCustomer _register;
-
-        // public CustomerManagerShould()
-        // {
-        //     _register = new RegisterCustomer();
-        // }
-
-
-        [Fact]
-        public void AddNewCustomer()
+        public CustomerManagerShould()
         {
-            var custManager = new CustomerManager();
-            var cust = new Customer("Sarah", "Jones", "563756", "Nash", "TN", "37128", "615-787-8898");
-            bool result = custManager.AddCustomer(cust);
+            _register = new CustomerManager();
+        }
+
+
+        [Theory]
+        [InlineData("Sarah", "Jones", "787878", "Nash", "TN", "37128", "615-676-6767")]
+  
+        public void AddNewCustomer(string firstName, string lastName, string streetAddress, string city, string state, string zip, string phone)
+        {
+            var result = _register.AddCustomer(firstName, lastName, streetAddress, city, state, zip, phone);
             Assert.True(result);
         }
 
