@@ -1,5 +1,7 @@
 // using System;
 // using Xunit;
+// using Bangazon.Models;
+// using Bangazon.Managers;
 
 // namespace Bangazon.Tests
 // {

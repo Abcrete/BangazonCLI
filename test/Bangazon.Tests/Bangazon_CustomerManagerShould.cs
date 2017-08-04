@@ -9,10 +9,12 @@ namespace Bangazon.Tests
     public class CustomerManagerShould
     {
         private readonly CustomerManager _register;
+        private readonly DatabaseInterface _db;
 
         public CustomerManagerShould()
         {
-            _register = new CustomerManager();
+            _db = new DatabaseInterface("BANGAZON_TEST_DB");
+            _register = new CustomerManager(_db);
         }
 
 
@@ -21,16 +23,33 @@ namespace Bangazon.Tests
   
         public void AddNewCustomer(string name, string streetAddress, string city, string state, string zip, string phone)
         {
-            var result = _register.AddCustomer(name, streetAddress, city, state, zip, phone);
-            Assert.True(result);
+            int id = _register.AddCustomer(name, streetAddress, city, state, zip, phone);
+            Assert.True(id != 0);
         }
 
         [Fact]
         public void ListCustomers()
         {
-            List<Customer> customers = _register.GetCustomer();
+            List<Customer> customers = _register.GetCustomers();
 
             Assert.IsType<List<Customer>>(customers);
+        }
+
+
+        [Theory]
+        [InlineData("Sarah Jones", "787878", "Nash", "TN", "37128", "615-676-6767")]
+        public void GetSingleCustomer (string name, string streetAddress, string city, string state, string zip, string phone)
+        {
+            
+            int id = _register.AddCustomer(name, streetAddress, city, state, zip, phone);
+
+            Customer customer = _register.GetCustomer(id);
+            Assert.True(customer.CustomerId == id);
+        }
+
+        public void Dispose()
+        {
+            _db.Delete("DELETE FROM Customer");
         }
     }
 }
