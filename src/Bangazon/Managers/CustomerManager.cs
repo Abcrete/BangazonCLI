@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bangazon.Models;
 
 namespace Bangazon.Managers
@@ -9,7 +10,7 @@ namespace Bangazon.Managers
         private List<Customer> _customers = new List<Customer>();
 
 
-        public bool AddCustomer (string name, string streetAddress, string city, string state, string zip, string phone)
+        public int AddCustomer (string name, string streetAddress, string city, string state, string zip, string phone)
         {
             int id = 1;
             _customers.Add(
@@ -22,17 +23,22 @@ namespace Bangazon.Managers
                     State = state,
                     ZipCode = zip,
                     Phone = phone
-
-
                 }
             );
 
-            return true;
+            return id;
         }
 
-        public List<Customer> GetCustomer ()
+        public List<Customer> GetCustomers ()
         {
+            foreach (var item in _customers)
+            {
+                Console.WriteLine($"item");
+                
+            }
             return _customers;
         }
+
+        public Customer GetCustomer (int id) => _customers.SingleOrDefault(person => person.CustomerId == id);
     }
 }
