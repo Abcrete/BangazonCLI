@@ -1,4 +1,4 @@
-namespace Bangazon
+namespace Bangazon.Models
 {
     /*
       SUMMARY

@@ -1,6 +1,5 @@
 using System;
 
-
 namespace Bangazon.Models
 {
     /* Order Class represents the properties for the entries to the Order Tabel in database

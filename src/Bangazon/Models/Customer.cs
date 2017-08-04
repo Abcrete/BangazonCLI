@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Bangazon.Managers;
-
 namespace Bangazon.Models
 {
     public class Customer

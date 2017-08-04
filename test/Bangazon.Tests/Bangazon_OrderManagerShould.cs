@@ -22,14 +22,15 @@ namespace Bangazon.Tests
         public void CreateNewOrder()
         {
             Product kite = new Product();  // create a product 
-            bool success = _manager.CreateOrder(kite, 1); // add that product to new order, that is created on call, second argument is customer id
-            Assert.True(success);
+            Customer cust = new Customer();
+            int id = _manager.CreateOrder(kite, cust); // add that product to new order, that is created on call, second argument is customer id
+            Assert.IsType<int>(id);
         }
 
         [Fact]
         public void ListOrders()
         {
-            List<Order> orders = _manager.GetOrders(); // retrieve all orders as a List
+            var orders = _manager.GetOrders(); // retrieve all orders as a List
             foreach(Order o in orders) // iterate through all orders
             {
                 Assert.IsType<Order>(o); // assert that what is returned is a list of orders
@@ -40,7 +41,8 @@ namespace Bangazon.Tests
         [Fact]
         public void AddPaymentTypeToOrder()
         {
-            _manager.AddPayment(1, 1);  // pass order id and payment id to the manager
+            var added = _manager.AddPayment(1, 1);  // pass order id and payment id to the manager
+            Assert.True(added);
         }
     }
 }
