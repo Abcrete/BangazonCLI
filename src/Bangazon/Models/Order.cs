@@ -8,5 +8,6 @@ namespace Bangazon
         public Customer customer {get; set;}
         public PaymentType payment {get; set;}
         public DateTime dateCreated {get; set;}
+        
     }
 }
