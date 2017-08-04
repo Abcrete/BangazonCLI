@@ -30,5 +30,9 @@ namespace Bangazon.Managers
             return true;
         }
 
+        public List<Customer> GetCustomer ()
+        {
+            return _customers;
+        }
     }
 }
