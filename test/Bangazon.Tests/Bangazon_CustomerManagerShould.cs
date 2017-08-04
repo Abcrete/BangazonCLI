@@ -16,11 +16,11 @@ namespace Bangazon.Tests
 
 
         [Theory]
-        [InlineData("Sarah", "Jones", "787878", "Nash", "TN", "37128", "615-676-6767")]
+        [InlineData("Sarah Jones", "787878", "Nash", "TN", "37128", "615-676-6767")]
   
-        public void AddNewCustomer(string firstName, string lastName, string streetAddress, string city, string state, string zip, string phone)
+        public void AddNewCustomer(string name, string streetAddress, string city, string state, string zip, string phone)
         {
-            var result = _register.AddCustomer(firstName, lastName, streetAddress, city, state, zip, phone);
+            var result = _register.AddCustomer(name, streetAddress, city, state, zip, phone);
             Assert.True(result);
         }
 

@@ -9,15 +9,14 @@ namespace Bangazon.Managers
         private List<Customer> _customers = new List<Customer>();
 
 
-        public bool AddCustomer (string firstName, string lastName, string streetAddress, string city, string state, string zip, string phone)
+        public bool AddCustomer (string name, string streetAddress, string city, string state, string zip, string phone)
         {
             int id = 1;
             _customers.Add(
                 new Customer()
                 {
                     CustomerId = id,
-                    FirstName = firstName,
-                    LastName = lastName,
+                    Name = name,
                     StreetAddress = streetAddress,
                     City = city,
                     State = state,
