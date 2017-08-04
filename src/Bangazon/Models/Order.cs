@@ -1,6 +1,6 @@
 using System;
 
-namespace Bangazon
+namespace Bangazon.Models
 {
     public class Order
     {
@@ -8,6 +8,6 @@ namespace Bangazon
         public Customer customer {get; set;}
         public PaymentType payment {get; set;}
         public DateTime dateCreated {get; set;}
-        
+
     }
 }
