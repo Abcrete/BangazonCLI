@@ -3,7 +3,7 @@ namespace Bangazon.Models
   public class Product
    //SUMMARY
     /*This class is authored by Azim. 
-      Product Class identifies the properties for the entries to the Product tabel in database*/
+      Product Class identifies the properties for the entries to the Product Tabel in database*/
   {
     public int id { get; set; }
     public string title { get; set; }
