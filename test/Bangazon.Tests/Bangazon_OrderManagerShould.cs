@@ -34,6 +34,7 @@ namespace Bangazon.Tests
             {
                 Assert.IsType<Order>(o); // assert that what is returned is a list of orders
             }
+            Assert.True(orders.Count > 0);
         }
 
         [Fact]
