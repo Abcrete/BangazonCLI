@@ -88,7 +88,7 @@ namespace Bangazon
                 SqliteCommand dbcmd = _connection.CreateCommand ();
 
                 // Query the customer table to see if table is created
-                dbcmd.CommandText = $"select CustomerID from customer";
+                dbcmd.CommandText = $"select CustomerID from Customer";
 
                 try
                 {
@@ -98,10 +98,9 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table customer (
+                        dbcmd.CommandText = $@"create table Customer (
                             `CustomerID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `Name`	varchar(80) not null, 
                             `StreetAddress` varchar(80),
@@ -133,7 +132,7 @@ namespace Bangazon
                 SqliteCommand dbcmd = _connection.CreateCommand ();
 
                 // Query the order table to see if table is created
-                dbcmd.CommandText = $"select OrderID from Order";
+                dbcmd.CommandText = $"select OrderID from [Order]";
 
                 try
                 {
@@ -143,10 +142,9 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table order (
+                        dbcmd.CommandText = $@"create table [Order] (
                             `OrderID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `DateCreated` DATE DEFAULT (datetime('now','localtime')),
                             `CustomerID` integer not null,
@@ -187,7 +185,6 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table PaymentType (
@@ -230,10 +227,10 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table ProdOrder (
+                            `ProdOrder` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `OrderID`	integer NOT NULL,
                             `ProductID`	integer NOT NULL
                         )";
@@ -270,7 +267,6 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table ProductType (
@@ -310,18 +306,19 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table product (
+                        dbcmd.CommandText = $@"create table Product (
                             `ProductID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `Title`	varchar(80) not null, 
                             `Description`	varchar(80), 
                             `Price` float,
                             `Quantity` int,
                             `CustomerID` integer not null,
+                            `ProductTypeID` integer not null,
                             `CreateDate` DATE DEFAULT (datetime('now','localtime')),
-                            FOREIGN KEY(`CustomerID`) REFERENCES `Customer`(`CustomerID`)
+                            FOREIGN KEY(`CustomerID`) REFERENCES `Customer`(`CustomerID`),
+                            FOREIGN KEY(`ProductTypeID`) REFERENCES `ProductType`(`ProductTypeID`)
                         )";
                         try
                         {
