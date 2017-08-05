@@ -1,6 +1,7 @@
 ﻿using System;
 using Bangazon.Models;
 using Bangazon.Managers;
+using Bangazon.Actions;
 
 namespace Bangazon
 {
@@ -16,42 +17,29 @@ namespace Bangazon
             db.CheckProductTable();
             db.CheckProductTypeTable();
             db.CheckProdOrderTable();
-            //db.VerifyDataExists();
 
-            // Present the main menu
-            Console.WriteLine ("*************************************************");
-            Console.WriteLine ("Welcome to Bangazon! Command Line Ordering System");
-            Console.WriteLine ("*************************************************");
-            Console.WriteLine ("1. Create a customer account");
-			Console.Write ("> ");
+            // Create Instance of MenuManager   T.L.
+            MenuManager menu = new MenuManager();
+            CustomerManager customer = new CustomerManager(db);
 
-			// Read in the user's choice
+
+			// choice will hold the reference to the number the user selected   
+            // after the MenuManager was displayed T.L.
 			int choice;
-			Int32.TryParse (Console.ReadLine(), out choice);
-
-            // If option 1 was chosen, create a new customer account
-            if (choice == 1)
+			do
             {
-                Console.WriteLine ("Enter customer first name");
-                Console.Write ("> ");
-                string firstName = Console.ReadLine();
-                Console.WriteLine ("Enter customer last name");
-                Console.Write ("> ");
-                string lastName = Console.ReadLine();
-                Console.WriteLine ("Enter customer city");
-                Console.Write ("> ");
-                string city = Console.ReadLine();
-                Console.WriteLine ("Enter customer state");
-                Console.Write ("> ");
-                string state = Console.ReadLine();
-                Console.WriteLine ("Enter customer postal code");
-                Console.Write ("> ");
-                string postalCode = Console.ReadLine();
-                Console.WriteLine ("Enter customer phone number");
-                Console.Write ("> ");
-                string phoneNumber = Console.ReadLine();
-                CustomerManager manager = new CustomerManager(db);
-            }
+                // Display Menu from MenuManager 
+                // Save selected int to choice  T.L
+                choice = menu.ShowMenu();
+
+                switch (choice)
+                {
+                    // if Menu option 1 is selected: Add new Customer   T.L.
+                    case 1:
+                        CreateNewCustomer.DoAction(customer);
+                        break;
+                }
+            } while(choice != 0);
         }
     }
 }
