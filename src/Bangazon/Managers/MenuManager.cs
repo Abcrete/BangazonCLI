@@ -17,6 +17,7 @@ namespace Bangazon.Managers
             Console.WriteLine("1. Create a customer account");
             Console.Write("> ");
 
+            // Capture key char that was entered
             ConsoleKeyInfo enteredKey = Console.ReadKey();
             Console.WriteLine("");
             return int.Parse(enteredKey.KeyChar.ToString());

@@ -1,5 +1,8 @@
 namespace Bangazon.Models
 {
+    // Customer class that provides get and set properties for all Customers
+    // No Dependencies
+    // Authored by : Tamela Lerma
     public class Customer
     {
         public int CustomerId {get; set;}

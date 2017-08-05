@@ -13,10 +13,14 @@ namespace Bangazon.Managers
     // Authored by Tamela Lerma
     public class CustomerManager
     {
+        // Customers will be added to this list when GetCustomers Method makes a call to the DB     T.L
         private List<Customer> _customers = new List<Customer>();
 
         private DatabaseInterface _db;
 
+        // An instance of DatabaseInterface is made in the Program.cs file
+        // When the CustomerManager Instance is created, it is passed the DatabaseInterface instance
+        // Authored by : Tamela Lerma
         public CustomerManager(DatabaseInterface db)
         {
             _db = db;
@@ -25,11 +29,14 @@ namespace Bangazon.Managers
         // Method to Add a Customer to DataBase
         // No Dependencies/FK
         // requires 7 arguments
+        // Returns ID of last Customer entered
         // Authored by Tamela Lerma
         public int AddCustomer (string name, string streetAddress, string city, string state, string zip, string phone)
         {
             int id = _db.Insert($"insert into Customer values(null, '{name}', '{streetAddress}', '{city}', '{state}', '{zip}', '{phone}')"); // int to Store the Last ID for object that is added
             
+            // A new Instance of Customer is made and it's properties are set
+            // Once properties are set, it is added to the List<Customers>
             _customers.Add(
                 new Customer()
                 {
@@ -46,6 +53,10 @@ namespace Bangazon.Managers
             return id;
         }
 
+        // public method that returns a type Customer
+        // method Queries DB to return all Customers in a table
+        // Their properties are set and added to List<Customer>
+        // Authored by : Tamela Lerma
         public List<Customer> GetCustomers ()
         {
             _db.Query("select * from Customer", (SqliteDataReader reader) =>{
