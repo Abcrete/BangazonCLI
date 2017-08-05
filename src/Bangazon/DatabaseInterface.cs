@@ -114,7 +114,7 @@ namespace Bangazon
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
-                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        catch (Microsoft.Data.Sqlite.SqliteException)
                         {
                             Console.WriteLine("Table already exists. Ignoring");
                         }
@@ -148,10 +148,9 @@ namespace Bangazon
                     {
                         dbcmd.CommandText = $@"create table order (
                             `OrderID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                            `AccountNumber`	varchar(20) not null, 
                             `DateCreated` DATE DEFAULT (datetime('now','localtime')),
                             `CustomerID` integer not null,
-                            `PaymentTypeID` integer not null,
+                            `PaymentTypeID` integer,
                              FOREIGN KEY(`CustomerID`) REFERENCES `Customer`(`CustomerID`),
                              FOREIGN KEY(`PaymentTypeID`) REFERENCES `PaymentType`(`PaymentTypeID`)
                         )";
@@ -159,7 +158,7 @@ namespace Bangazon
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
-                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        catch (Microsoft.Data.Sqlite.SqliteException)
                         {
                             Console.WriteLine("Table already exists. Ignoring");
                         }
@@ -202,7 +201,7 @@ namespace Bangazon
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
-                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        catch (Microsoft.Data.Sqlite.SqliteException)
                         {
                             Console.WriteLine("Table already exists. Ignoring");
                         }
@@ -242,7 +241,7 @@ namespace Bangazon
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
-                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        catch (Microsoft.Data.Sqlite.SqliteException)
                         {
                             Console.WriteLine("Table already exists. Ignoring");
                         }
@@ -282,7 +281,7 @@ namespace Bangazon
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
-                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        catch (Microsoft.Data.Sqlite.SqliteException)
                         {
                             Console.WriteLine("Table already exists. Ignoring");
                         }
@@ -328,7 +327,7 @@ namespace Bangazon
                         {
                             dbcmd.ExecuteNonQuery ();
                         }
-                        catch (Microsoft.Data.Sqlite.SqliteException crex)
+                        catch (Microsoft.Data.Sqlite.SqliteException)
                         {
                             Console.WriteLine("Table already exists. Ignoring");
                         }
