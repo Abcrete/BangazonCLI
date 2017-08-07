@@ -7,17 +7,17 @@ using Bangazon.Managers;
 namespace Bangazon.Tests
 {
     // public Unit Testing Class
-    // Should provide ability to Add a Customer, Retrieve a List of Customers, and a single Customer
+    // Should provide ability to Add a ProductType, Retrieve a List of ProductTypes, and a single ProductType
     // Authored by : Tamela Lerma
     public class ProductTypeManagerShould
     {
-        // Internal Property to set reference to Type CustomerManager   T.L.
+        // Internal Property to set reference to Type ProductTypeManager   T.L.
         private readonly ProductTypeManager _register;
         // Internal Property to set reference to DatabaseInterface and DB   T.L.
         private readonly DatabaseInterface _db;
         // Constructor method to access internal properties and set their values
         // Environment variable is passed as argument to Instance of DatabaseInterface
-        // that Instance is then passed as an argument to the CustomerManager Instance to establish connection to SQL DB
+        // that Instance is then passed as an argument to the ProductTypeManager Instance to establish connection to SQL DB
         //  Authored by : Tamela Lerma
         public ProductTypeManagerShould()
         {
@@ -30,8 +30,8 @@ namespace Bangazon.Tests
         [InlineData("food")]
         [InlineData("toys")]
         [InlineData("clothing")]
-        // This method requires 7 arguments to set Customer propeties
-        // returns CustomerId
+        // This method requires 1 arguments to set 
+        // returns ProductTypeId
         // Authored by : Tamela Lerma
         public void AddNewProductType(string name)
         {
@@ -39,7 +39,7 @@ namespace Bangazon.Tests
             Assert.True(id != 0);
         }
 
-        // Method that returns a List with type Customer
+        // Method that returns a List with type ProductType
         // Authored by : Tamela Lerma
         [Fact]
         public void ListCustomers()
@@ -54,8 +54,8 @@ namespace Bangazon.Tests
         [InlineData("books")]
         [InlineData("kitchen")]
         [InlineData("tech")]
-        // Method that returns a single Customer
-        // Accepts 1 arguement which is CustomerId
+        // Method that returns a single ProductType
+        // Accepts 1 arguement which is ProductTypeId
         // Authored by : Tamela Lerma
         public void GetSingleProductType (string name)
         {
@@ -65,7 +65,7 @@ namespace Bangazon.Tests
             Assert.True(productType.Id == productTypeId);
         }
 
-        // Method that deletes test entries of Customers in the DB  T.L.
+        // Method that deletes test entries of ProductType in the DB  T.L.
         public void Dispose()
         {
             _db.Delete("DELETE FROM Customer");

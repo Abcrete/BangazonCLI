@@ -21,6 +21,7 @@ namespace Bangazon
             // Create Instance of MenuManager   T.L.
             MenuManager menu = new MenuManager();
             CustomerManager customer = new CustomerManager(db);
+            ProductTypeManager productType = new ProductTypeManager(db);
 
 
 			// choice will hold the reference to the number the user selected   
