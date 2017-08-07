@@ -12,7 +12,7 @@ namespace Bangazon.Managers
     // Remove Product
     // Return one product
     // Return stale product
-    // Return most popular product
+    // Return most popular products
 
     //This class is authored by Azim. 
     public class ProductManager
