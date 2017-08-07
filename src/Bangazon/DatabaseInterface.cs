@@ -311,12 +311,12 @@ namespace Bangazon
                         dbcmd.CommandText = $@"create table Product (
                             `ProductID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `Title`	varchar(80) not null, 
-                            `Description`	varchar(80), 
-                            `Price` float,
-                            `Quantity` int,
-                            `CustomerID` integer not null,
-                            `ProductTypeID` integer not null,
-                            `CreateDate` DATE DEFAULT (datetime('now','localtime')),
+                            `Description`	varchar(1000) not null, 
+                            `Price`	double not null,
+                            `Quantity`	int not null,
+                            `ProductTypeID`	integer not null,
+                            `CustomerID`	integer not null,
+                            `CreateDate`   varchar(80) not null,
                             FOREIGN KEY(`CustomerID`) REFERENCES `Customer`(`CustomerID`),
                             FOREIGN KEY(`ProductTypeID`) REFERENCES `ProductType`(`ProductTypeID`)
                         )";
