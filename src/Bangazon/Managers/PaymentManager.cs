@@ -1,13 +1,16 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Data.Sqlite;
 using Bangazon.Models;
 
+
 namespace Bangazon.Managers
 {
     public class PaymentManager
     {
+
         private List<PaymentType> _pt = new List<PaymentType>();
         private DatabaseInterface _db;
 
