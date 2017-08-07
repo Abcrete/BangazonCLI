@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Bangazon.Models
 {
@@ -11,7 +12,7 @@ namespace Bangazon.Models
         /* Customer who the order belongs to */
         public int customerId {get; set;}
         /* Payment for the order, if null or is incomplete */
-        public int paymentId {get; set;}
+        public int? paymentTypeId {get; set;}
         /* Date order was instantialized */
         public string dateCreated {get; set;}
     }
