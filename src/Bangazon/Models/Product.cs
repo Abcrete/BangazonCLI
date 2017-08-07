@@ -12,8 +12,8 @@ namespace Bangazon.Models
     public string description { get; set; }
     public double price { get; set; }
     public int quantity { get; set; }
-    public Customer customer { get; set; }
-    public Product product { get; set; }
+    public int customerId { get; set; }
+    public int productTypeId { get; set; }
     public DateTime dateCreated { get; set; }
   }
 }

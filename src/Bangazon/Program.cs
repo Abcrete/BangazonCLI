@@ -66,7 +66,6 @@ namespace Bangazon
                             Console.WriteLine("Stop being Stupid, choose a customer");
                             break;
                         }
-
                 }
             } while(choice != 0);
         }

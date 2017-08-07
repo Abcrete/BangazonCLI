@@ -13,7 +13,7 @@ namespace Bangazon.Managers
     // Authored by Tamela Lerma
     public class ProductTypeManager
     {
-        // Customers will be added to this list when GetProductTypes Method makes a call to the DB     T.L
+        // ProductType will be added to this list when GetProductTypes Method makes a call to the DB     T.L
         private List<ProductType> _productTypes = new List<ProductType>();
 
         private DatabaseInterface _db;
