@@ -1,4 +1,12 @@
+
+using System;
+using System.Collections.Generic;
+using Bangazon.Managers;
+using Bangazon.Models;
+
+
 namespace Bangazon.Models
+
 {
     /*
       SUMMARY

@@ -146,7 +146,7 @@ namespace Bangazon
                     Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table order (
+                        dbcmd.CommandText = $@"create table `order` (
                             `OrderID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `DateCreated` DATE DEFAULT (datetime('now','localtime')),
                             `CustomerID` integer not null,
