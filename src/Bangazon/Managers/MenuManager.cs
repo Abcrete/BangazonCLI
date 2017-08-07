@@ -16,6 +16,7 @@ namespace Bangazon.Managers
             Console.WriteLine("Welcome to Bangazon! Command Line Ordering System");
             Console.WriteLine("*************************************************");
             Console.WriteLine("1. Create a customer account");
+            Console.WriteLine("2. Choose active customer");
             Console.Write("> ");
 
             // Capture key char that was entered
