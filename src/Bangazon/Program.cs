@@ -24,7 +24,9 @@ namespace Bangazon
             ProductTypeManager productType = new ProductTypeManager(db);
             PaymentManager payment = new PaymentManager(db);
 
+            // int will hold active customer T.L.
             int activeCustomer = 0;
+
 			// choice will hold the reference to the number the user selected   
             // after the MenuManager was displayed T.L.
 			int choice;
@@ -36,19 +38,29 @@ namespace Bangazon
 
                 switch (choice)
                 {
-                    // if Menu option 1 is selected: Add new Customer   T.L.
+                    // if Menu option 1 is selected: Add new Customer 
+                    // Method is called in CreateNewCustomer which calls Method in CustomerManager  T.L.
                     case 1:
                         CreateNewCustomer.DoAction(customer);
                         break;
-
+                    // if Menu option 2 is selected: 
+                    // Method from GetCustomersAction makes a call to CustomersManager
+                    // Returns a list of Customers to display in terminal
+                    // The selected Customer's ID is stored in activeCustomer
+                    // This variable will then be passed to case 3
+                    // Authored by : Tamela Lerma & Jason Smith
                     case 2: 
-                        activeCustomer = GetCustomers.DoAction(customer);
+                        activeCustomer = GetCustomersAction.DoAction(customer);
                         break;
-
+                    // User will be prompted to first select a customer
+                    // once customer is selected
+                    // a Method in CreatePaymentAction is called which 
+                    // calls a Method in PaymentTypeManager to create a new payment
+                    // Authored by : Tamela Lerma & Jason Smith
                     case 3:
                         if (activeCustomer != 0)
                         {
-                            CustomerPaymentAction.DoAction(payment, activeCustomer);
+                            CreatePaymentAction.DoAction(payment, activeCustomer);
                             break;
                         } else {
                             Console.WriteLine("Stop being Stupid, choose a customer");

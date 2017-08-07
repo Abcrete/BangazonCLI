@@ -10,7 +10,7 @@ namespace Bangazon.Actions
     // User will be able to enter in the number for which customer to select
     // switch statement case 2 from Program.cs file
     // Authored by: Tamela Lerma
-    public class GetCustomers 
+    public class GetCustomersAction
     {
         public static int DoAction(CustomerManager customer)
         {
@@ -32,8 +32,8 @@ namespace Bangazon.Actions
             Console.Write(">");
 
             int CustomerChoice = int.Parse(Console.ReadLine());
-            // take the number that was entered, minus 1 to get the index position from the list. Then Print out CustomerId and Name    T.L.
 
+            // take the number that was entered, minus 1 to get the index position from the list. Then Print out CustomerId and Name    T.L.
             return customers[CustomerChoice - 1].CustomerId;    
         }
     }
