@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Bangazon.Models;
+using Microsoft.Data.Sqlite;
 
 namespace Bangazon.Managers
 {
@@ -39,6 +40,19 @@ namespace Bangazon.Managers
             Authored by Jason Smith */
         public List<Order> GetOrders()
         {
+            _orders = _db.Query($"SELECT id, customerId, paymentTypeId, dateCreated FROM [order]", 
+            (SqliteDataReader reader) => {
+                    _orders.Clear();
+                    while (reader.Read ())
+                    {
+                        _orders.Add(new Order(){
+                            id = reader.GetInt32(0),
+                            dateCreated = reader[1].ToString(),
+                            customerId = reader.GetInt32(2),
+                            paymentId = reader.GetInt32(3)
+                        });
+                    }
+                });
             return _orders;            
         }
 
