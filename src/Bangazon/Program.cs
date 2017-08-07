@@ -39,6 +39,10 @@ namespace Bangazon
                     case 1:
                         CreateNewCustomer.DoAction(customer);
                         break;
+
+                    case 2: 
+                        GetCustomers.DoAction(customer);
+                        break;
                 }
             } while(choice != 0);
         }
