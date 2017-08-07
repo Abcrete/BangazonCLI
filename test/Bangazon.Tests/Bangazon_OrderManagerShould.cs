@@ -18,25 +18,25 @@ namespace Bangazon.Tests
             _manager = new OrderManager(_db);  // initialize OrderManager
         }
 
-        [Fact]
-        public void CreateNewOrder()
-        {
-            Product kite = new Product();  // create a product 
-            Customer cust = new Customer();
-            int id = _manager.CreateOrder(kite, cust); // add that product to new order, that is created on call, second argument is customer id
-            Assert.IsType<int>(id);
-        }
+        // [Fact]
+        // public void CreateNewOrder()
+        // {
+        //     Product kite = new Product();  // create a product 
+        //     Customer cust = new Customer();
+        //     int id = _manager.CreateOrder(kite, cust); // add that product to new order, that is created on call, second argument is customer id
+        //     Assert.IsType<int>(id);
+        // }
 
-        [Fact]
-        public void ListOrders()
-        {
-            var orders = _manager.GetOrders(); // retrieve all orders as a List
-            foreach(Order o in orders) // iterate through all orders
-            {
-                Assert.IsType<Order>(o); // assert that what is returned is a list of orders
-            }
-            Assert.True(orders.Count > 0);
-        }
+        // [Fact]
+        // public void ListOrders()
+        // {
+        //     var orders = _manager.GetOrders(); // retrieve all orders as a List
+        //     foreach(Order o in orders) // iterate through all orders
+        //     {
+        //         Assert.IsType<Order>(o); // assert that what is returned is a list of orders
+        //     }
+        //     Assert.True(orders.Count > 0);
+        // }
 
         [Fact]
         public void AddPaymentTypeToOrder()
