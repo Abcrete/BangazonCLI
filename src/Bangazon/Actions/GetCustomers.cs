@@ -12,6 +12,7 @@ namespace Bangazon.Actions
     // Authored by: Tamela Lerma
     public class GetCustomers 
     {
+        public CustomerPaymentAction customerPayment = new CustomerPaymentAction();
         public static void DoAction(CustomerManager customer)
         {
             // Clear Console for Menu prompts on Customer information
@@ -32,6 +33,9 @@ namespace Bangazon.Actions
             int CustomerChoice = int.Parse(Console.ReadLine());
             // take the number that was entered, minus 1 to get the index position from the list. Then Print out CustomerId and Name    T.L.
             Console.WriteLine($"{customers[CustomerChoice -1].CustomerId} {customers[CustomerChoice -1].Name}");
+
+            int CustomerId = customers[CustomerChoice - 1].CustomerId;
+            CustomerPaymentAction.AddCustomerPayment(CustomerId);
         }
     }
 }
