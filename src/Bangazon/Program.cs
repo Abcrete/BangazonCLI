@@ -22,8 +22,9 @@ namespace Bangazon
             MenuManager menu = new MenuManager();
             CustomerManager customer = new CustomerManager(db);
             ProductTypeManager productType = new ProductTypeManager(db);
+            PaymentManager payment = new PaymentManager(db);
 
-
+            int activeCustomer = 0;
 			// choice will hold the reference to the number the user selected   
             // after the MenuManager was displayed T.L.
 			int choice;
@@ -41,8 +42,19 @@ namespace Bangazon
                         break;
 
                     case 2: 
-                        GetCustomers.DoAction(customer);
+                        activeCustomer = GetCustomers.DoAction(customer);
                         break;
+
+                    case 3:
+                        if (activeCustomer != 0)
+                        {
+                            CustomerPaymentAction.DoAction(payment, activeCustomer);
+                            break;
+                        } else {
+                            Console.WriteLine("Stop being Stupid, choose a customer");
+                            break;
+                        }
+
                 }
             } while(choice != 0);
         }

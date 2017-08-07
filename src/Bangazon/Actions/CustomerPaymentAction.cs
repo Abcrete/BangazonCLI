@@ -7,16 +7,24 @@ namespace Bangazon.Actions
 {
     public class CustomerPaymentAction
     {
-
-        public PaymentType payment = new PaymentType();
-        public void AddCustomerPayment(int customerId)
+        
+        public DatabaseInterface db;
+        public static void DoAction(PaymentManager pm, int customerId)
         {
-            Console.WriteLine("Enter payment type");
+            PaymentType payment = new PaymentType();
+            Console.WriteLine($"Enter payment type");
             payment.Type = Console.ReadLine();
             Console.Write(">");
 
             Console.WriteLine("Enter Account Number");
+            payment.AccountNumber = Console.ReadLine();
+
+            pm.AddPaymentToCustomer(payment, customerId);
+            
+
+            
         }
+
     }
 }
 
