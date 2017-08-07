@@ -7,6 +7,11 @@ using System.Collections;
 
 namespace Bangazon
 {
+    /*
+    This class establishes the connection with the SQLLite DB
+    It contains methods to add, delete, and select from the database
+    Authored By: Aarti Jaisinghani
+     */
     public class DatabaseInterface
     {
         private string _connectionString;
@@ -19,6 +24,7 @@ namespace Bangazon
             _connection = new SqliteConnection(_connectionString);
         }
 
+        //selects records 
         public void Query(string command, Action<SqliteDataReader> handler)
         {
             using (_connection)
@@ -230,9 +236,12 @@ namespace Bangazon
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table ProdOrder (
-                            `ProdOrder` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+                            `ProdOrderID` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `OrderID`	integer NOT NULL,
-                            `ProductID`	integer NOT NULL
+                            `ProductID`	integer NOT NULL,
+                            FOREIGN KEY(`OrderID`) REFERENCES `Order`(`OrderID`),
+                            FOREIGN KEY(`ProductID`) REFERENCES `Product`(`ProductID`),
+
                         )";
                         try
                         {

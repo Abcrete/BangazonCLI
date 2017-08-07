@@ -1,4 +1,12 @@
+
+using System;
+using System.Collections.Generic;
+using Bangazon.Managers;
+using Bangazon.Models;
+
+
 namespace Bangazon.Models
+
 {
     /*
       SUMMARY
@@ -10,6 +18,6 @@ namespace Bangazon.Models
         public int PaymentTypeID { get; set;}
         public string AccountNumber {get; set;}
         public string Type {get; set;}
-        public Customer CustomerID {get; set;}
+        public int CustomerID {get; set;}
     }
 }
