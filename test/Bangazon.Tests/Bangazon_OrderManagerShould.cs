@@ -59,3 +59,4 @@ namespace Bangazon.Tests
         }
     }
 }
+
