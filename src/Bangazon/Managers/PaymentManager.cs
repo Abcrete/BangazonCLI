@@ -16,9 +16,10 @@ namespace Bangazon.Managers
             _db = db;
         }
 
-        public List<Customer>AddPaymentToCustomer (PaymentType pt, Customer cust) 
+        public List<PaymentType> AddPaymentToCustomer (PaymentType pt) 
         {
-            return new List<Customer>();
+            _pt.Add(pt);
+            return _pt;
         }
 
        public List<PaymentType> GetPaymentsForCustomer (int id)
