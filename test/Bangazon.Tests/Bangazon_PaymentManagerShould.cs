@@ -22,10 +22,12 @@ namespace Bangazon.Tests
         public void CheckAddPaymentToCustomer()
         {
             PaymentType pt = new PaymentType();
-            Customer cust = new Customer();
-            List<PaymentType> newlist = _manager.AddPaymentToCustomer(pt); 
-            Assert.Contains(pt, newlist);
-          //  Assert.IsType<List<PaymentType>>(newlist);
+            int id = 1;
+            int  newid = _manager.AddPaymentToCustomer(pt,id); 
+            Assert.IsType<int>(newid);
+            Assert.True(newid != 0);
+
+           
         }
 
         [Fact]

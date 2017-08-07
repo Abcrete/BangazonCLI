@@ -7,6 +7,11 @@ using System.Collections;
 
 namespace Bangazon
 {
+    /*
+    This class establishes the connection with the SQLLite DB
+    It contains methods to add, delete, and select from the database
+    Authored By: Aarti Jaisinghani
+     */
     public class DatabaseInterface
     {
         private string _connectionString;
@@ -19,6 +24,7 @@ namespace Bangazon
             _connection = new SqliteConnection(_connectionString);
         }
 
+        //selects records 
         public void Query(string command, Action<SqliteDataReader> handler)
         {
             using (_connection)
@@ -88,7 +94,7 @@ namespace Bangazon
                 SqliteCommand dbcmd = _connection.CreateCommand ();
 
                 // Query the customer table to see if table is created
-                dbcmd.CommandText = $"select CustomerID from customer";
+                dbcmd.CommandText = $"select CustomerID from Customer";
 
                 try
                 {
@@ -101,7 +107,7 @@ namespace Bangazon
                     Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table customer (
+                        dbcmd.CommandText = $@"create table Customer (
                             `CustomerID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `Name`	varchar(80) not null, 
                             `StreetAddress` varchar(80),
@@ -133,7 +139,7 @@ namespace Bangazon
                 SqliteCommand dbcmd = _connection.CreateCommand ();
 
                 // Query the order table to see if table is created
-                dbcmd.CommandText = $"select OrderID from Order";
+                dbcmd.CommandText = $"select OrderID from [Order]";
 
                 try
                 {
@@ -146,7 +152,7 @@ namespace Bangazon
                     Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table `order` (
+                        dbcmd.CommandText = $@"create table [Order] (
                             `OrderID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `DateCreated` DATE DEFAULT (datetime('now','localtime')),
                             `CustomerID` integer not null,
@@ -234,8 +240,12 @@ namespace Bangazon
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table ProdOrder (
+                            `ProdOrderID` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `OrderID`	integer NOT NULL,
-                            `ProductID`	integer NOT NULL
+                            `ProductID`	integer NOT NULL,
+                            FOREIGN KEY(`OrderID`) REFERENCES `Order`(`OrderID`),
+                            FOREIGN KEY(`ProductID`) REFERENCES `Product`(`ProductID`),
+
                         )";
                         try
                         {
@@ -313,7 +323,7 @@ namespace Bangazon
                     Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
-                        dbcmd.CommandText = $@"create table product (
+                        dbcmd.CommandText = $@"create table Product (
                             `ProductID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `Title`	varchar(80) not null, 
                             `Description`	varchar(80), 
