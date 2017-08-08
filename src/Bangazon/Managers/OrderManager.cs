@@ -25,7 +25,14 @@ namespace Bangazon.Managers
         public int CreateOrder(int prodId, int custId)
         {
             DateTime rightNow = DateTime.Now;
-            int index = _db.Insert( $"INSERT INTO [order] VALUES (null, '{rightNow}', {custId}, null)");
+            int index = 0;
+            _db.Query($"SELECT orderId FROM [order] WHERE customerId = custId AND paymentTypeId IS NULL", (SqliteDataReader reader) => {
+                    index = reader.GetInt32(0);
+                }
+            );
+            if(index == 0) {
+                index = _db.Insert( $"INSERT INTO [order] VALUES (null, '{rightNow}', {custId}, null)");
+            }
             _db.Insert( $"INSERT INTO prodOrder VALUES (null, {index}, {prodId})");
             _orders.Add(
                 new Order()
