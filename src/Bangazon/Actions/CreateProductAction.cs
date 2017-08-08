@@ -22,7 +22,6 @@ namespace Bangazon.Actions
             Product product = new Product();
 
             // set CustomerId on Product Type from int that is passed in    T.L.
-            product.customerId = custId;
 
             List<ProductType> prodList = prodType.GetProductTypes();
             Console.WriteLine("Select Product Type");
@@ -35,19 +34,24 @@ namespace Bangazon.Actions
             Console.WriteLine($"{counter}. Add New Product Type");
             Console.Write(">");
 
+            product.customerId = custId;
+
             int choice = int.Parse(Console.ReadLine());
+            int prodTypeId;
             
             if (counter == choice) {
-                 Console.WriteLine("Enter Type of Product");
+                Console.WriteLine("Enter Type of Product");
+                prodTypeId = prodType.AddProductType(Console.ReadLine());
+            }else {
+                prodTypeId = prodList[choice -1].Id;
             }
-
+                
+            product.productTypeId = prodTypeId;
             // Last Id entered into DB is returned in  a ProductTypeManager ClassMethod
             // AddProductType returns that ID
             // that ID for the new ProductType is stored in an Int
             // Authored By : Tamela Lerma
-            int prodTypeId = prodType.AddProductType(Console.ReadLine());
             // The ProductTypeId property for product is set from this variable  T.L.
-            product.productTypeId = prodTypeId;
 
             // set title
             Console.WriteLine("Enter Product Name");
@@ -65,9 +69,7 @@ namespace Bangazon.Actions
             Console.WriteLine("Enter Quantity");
             product.quantity = int.Parse(Console.ReadLine());
             //set date
-            Console.WriteLine("Entered Date Product was Created");
-            product.dateCreated = DateTime.Parse(Console.ReadLine());
-            Console.Write(">");
+            product.dateCreated = DateTime.Now;
             
             // Call Method from ProductManager Class and pass in new Product Object to be added to DB  T.L. 
             prodManager.AddProduct(product);
