@@ -48,7 +48,7 @@ namespace Bangazon.Tests
                 newProduct.quantity = 10;
                 newProduct.customerId = 1;
                 newProduct.productTypeId = 1;
-                newProduct.dateCreated= DateTime.Today; 
+                newProduct.dateCreated = DateTime.Now; 
                 
             
             var result = _manager.AddProduct(newProduct);
@@ -88,7 +88,7 @@ namespace Bangazon.Tests
 
         public void Dispose()
         {
-            _db.Delete("DELETE FROM product");
+            // _db.Delete("DELETE FROM product");
         }
     }
 }
