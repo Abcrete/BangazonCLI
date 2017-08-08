@@ -20,17 +20,19 @@ namespace Bangazon.Managers
             _orders = new List<Order>();
         }
 
-        /*  Add an order to the database and return the id, which is the PK where it was placed 
+        /*  Checks if customer has an open order, if not add an order to the database and return the id, which is the PK where it was placed, 
+            either way the product will be add to the product order table for that order
             Authored by Jason Smith */
         public int CreateOrder(int prodId, int custId)
         {
             DateTime rightNow = DateTime.Now;
             int index = 0;
-            _db.Query($"SELECT orderId FROM [order] WHERE customerId = custId AND paymentTypeId IS NULL", (SqliteDataReader reader) => {
-                    index = reader.GetInt32(0);
-                }
-            );
-            if(index == 0) {
+            try {
+                _db.Query($"SELECT orderId FROM [order] WHERE customerId = {custId} AND paymentTypeId IS NULL", (SqliteDataReader reader) => {
+                        index = reader.GetInt32(0);
+                    }
+                );
+            }catch (System.InvalidOperationException) {
                 index = _db.Insert( $"INSERT INTO [order] VALUES (null, '{rightNow}', {custId}, null)");
             }
             _db.Insert( $"INSERT INTO prodOrder VALUES (null, {index}, {prodId})");
