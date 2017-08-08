@@ -57,6 +57,22 @@ namespace Bangazon
                 _connection.Close ();
             }
         }
+        // This method are used to update the tables in database
+        // This method is authored by Azim. 
+        public void Update(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open ();
+                SqliteCommand dbcmd = _connection.CreateCommand ();
+                dbcmd.CommandText = command;
+                
+                dbcmd.ExecuteNonQuery ();
+
+                dbcmd.Dispose ();
+                _connection.Close ();
+            }
+        }
 
         public int Insert(string command)
         {
@@ -104,7 +120,6 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table Customer (
@@ -149,7 +164,6 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table [Order] (
@@ -193,7 +207,6 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table PaymentType (
@@ -236,7 +249,6 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table ProdOrder (
@@ -279,7 +291,6 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table ProductType (
@@ -319,18 +330,19 @@ namespace Bangazon
                 }
                 catch (Microsoft.Data.Sqlite.SqliteException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     if (ex.Message.Contains("no such table"))
                     {
                         dbcmd.CommandText = $@"create table Product (
                             `ProductID`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                             `Title`	varchar(80) not null, 
-                            `Description`	varchar(80), 
-                            `Price` float,
-                            `Quantity` int,
-                            `CustomerID` integer not null,
-                            `CreateDate` DATE DEFAULT (datetime('now','localtime')),
-                            FOREIGN KEY(`CustomerID`) REFERENCES `Customer`(`CustomerID`)
+                            `Description`	varchar(1000) not null, 
+                            `Price`	double not null,
+                            `Quantity`	int not null,
+                            `ProductTypeID`	integer not null,
+                            `CustomerID`	integer not null,
+                            `CreateDate`   varchar(80) not null,
+                            FOREIGN KEY(`CustomerID`) REFERENCES `Customer`(`CustomerID`),
+                            FOREIGN KEY(`ProductTypeID`) REFERENCES `ProductType`(`ProductTypeID`)
                         )";
                         try
                         {
