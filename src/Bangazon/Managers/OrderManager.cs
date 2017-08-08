@@ -63,9 +63,9 @@ namespace Bangazon.Managers
 
         /*  Add a payment to the null field "payment" in an order, return true once complete
             Authored by Jason Smith */
-        public bool AddPayment(int payId, int orderId)
+         public bool AddPayment(int payId, int orderId)
         {
-            
+            _db.Update($"UPDATE [order] SET paymentTypeId = {payId} WHERE [order].orderId = {orderId}");
             return true;
         }
 
