@@ -46,6 +46,7 @@ namespace Bangazon.Managers
                 description= newProduct.description,
                 price = newProduct.price,
                 customerId = newProduct.customerId,
+                productTypeId = newProduct.productTypeId,
                 quantity = newProduct.quantity,
                 dateCreated= newProduct.dateCreated
             });
