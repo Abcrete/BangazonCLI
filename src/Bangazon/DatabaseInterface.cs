@@ -239,7 +239,7 @@ namespace Bangazon
                 SqliteCommand dbcmd = _connection.CreateCommand ();
 
                 // Query the ProdOrder table to see if table is created
-                dbcmd.CommandText = $"select OrderID,ProductID from ProdOrder";
+                dbcmd.CommandText = $"select OrderID, ProductID from ProdOrder";
 
                 try
                 {
@@ -257,7 +257,6 @@ namespace Bangazon
                             `ProductID`	integer NOT NULL,
                             FOREIGN KEY(`OrderID`) REFERENCES `Order`(`OrderID`),
                             FOREIGN KEY(`ProductID`) REFERENCES `Product`(`ProductID`)
-
                         )";
                         try
                         {
