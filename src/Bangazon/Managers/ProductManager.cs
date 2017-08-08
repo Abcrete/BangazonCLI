@@ -48,8 +48,6 @@ namespace Bangazon.Managers
                 customerId = newProduct.customerId,
                 productTypeId = newProduct.productTypeId,
                 quantity = newProduct.quantity,
-                customerId = newProduct.customerId,
-                productTypeId = newProduct.productTypeId,
                 dateCreated= newProduct.dateCreated
             });
 
