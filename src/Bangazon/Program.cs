@@ -23,6 +23,9 @@ namespace Bangazon
             CustomerManager customer = new CustomerManager(db);
             ProductTypeManager productType = new ProductTypeManager(db);
             PaymentManager payment = new PaymentManager(db);
+            ProductManager product = new ProductManager(db);
+            OrderManager order = new OrderManager(db);
+
 
             // int will hold active customer T.L.
             int activeCustomer = 0;
@@ -61,6 +64,20 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             CreatePaymentAction.DoAction(payment, activeCustomer);
+                            break;
+                        } else {
+                            Console.WriteLine("Please choose a customer first");
+                            break;
+                        }
+                    // User will need to first select a active customer
+                    // once customer is selected
+                    // a Method in AddProductToCartAction is called which 
+                    // calls a Method in ProductManager to add a product to customers order
+                    // Authored by : Azim
+                    case 5: 
+                        if (activeCustomer != 0)
+                        {
+                            AddProductToCartAction.DoAction(order, product, activeCustomer);
                             break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
