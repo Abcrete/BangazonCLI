@@ -11,12 +11,12 @@ namespace Bangazon
         {
             // Seed the database if none exists
             var db = new DatabaseInterface("BANGAZON_TEST_DB");
+            db.CheckProdOrderTable();
             db.CheckCustomerTable();
             db.CheckOrderTable();
             db.CheckPaymentTypeTable();
             db.CheckProductTable();
             db.CheckProductTypeTable();
-            db.CheckProdOrderTable();
 
             // Create Instance of MenuManager   T.L.
             MenuManager menu = new MenuManager();

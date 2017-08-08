@@ -36,9 +36,9 @@ namespace Bangazon.Managers
         // requires 8 arguments
         // Returns ID of last Product entered
         // Authored by Azim
-        public int AddProduct(Product newProduct, Customer customer, ProductType prodType){
+        public int AddProduct(Product newProduct){
             // Insert into DB
-            int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {customer.CustomerId}, {prodType.id}, '{newProduct.dateCreated}')");
+            int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.customerId}, {newProduct.productTypeId}, '{newProduct.dateCreated}')");
             
                 _products.Add(new Product(){
                 id = newProductId,
@@ -46,6 +46,8 @@ namespace Bangazon.Managers
                 description= newProduct.description,
                 price = newProduct.price,
                 quantity = newProduct.quantity,
+                customerId = newProduct.customerId,
+                productTypeId = newProduct.productTypeId,
                 dateCreated= newProduct.dateCreated
             });
 
@@ -80,12 +82,12 @@ namespace Bangazon.Managers
             );
             return _products;
         }
-        // This method removes a product by its id passed in from databse
+        // This method removes a product if it is not added to the order yet
         // requires id of the product
         // Authored by Azim
         public bool RemoveProduct(int id)
         {
-            _db.Insert($"DELETE FROM Product WHERE ProductID = {id}");
+            _db.Insert($"DELETE FROM product WHERE productId == {id} and productId NOT IN (SELECT o.productId FROM prodorder o)");
             return true;
         }
         // This method gets a single Product from databse

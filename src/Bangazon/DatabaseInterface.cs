@@ -57,6 +57,22 @@ namespace Bangazon
                 _connection.Close ();
             }
         }
+        // This method are used to update the tables in database
+        // This method is authored by Azim. 
+        public void Update(string command)
+        {
+            using (_connection)
+            {
+                _connection.Open ();
+                SqliteCommand dbcmd = _connection.CreateCommand ();
+                dbcmd.CommandText = command;
+                
+                dbcmd.ExecuteNonQuery ();
+
+                dbcmd.Dispose ();
+                _connection.Close ();
+            }
+        }
 
         public int Insert(string command)
         {
@@ -240,7 +256,7 @@ namespace Bangazon
                             `OrderID`	integer NOT NULL,
                             `ProductID`	integer NOT NULL,
                             FOREIGN KEY(`OrderID`) REFERENCES `Order`(`OrderID`),
-                            FOREIGN KEY(`ProductID`) REFERENCES `Product`(`ProductID`),
+                            FOREIGN KEY(`ProductID`) REFERENCES `Product`(`ProductID`)
 
                         )";
                         try
