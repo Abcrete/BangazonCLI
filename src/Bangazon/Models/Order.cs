@@ -14,6 +14,6 @@ namespace Bangazon.Models
         /* Payment for the order, if null or is incomplete */
         public int? paymentTypeId {get; set;}
         /* Date order was instantialized */
-        public string dateCreated {get; set;}
+        public DateTime dateCreated {get; set;}
     }
 }

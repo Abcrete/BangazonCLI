@@ -24,7 +24,8 @@ namespace Bangazon.Managers
             Authored by Jason Smith */
         public int CreateOrder(int prodId, int custId)
         {
-            int index = _db.Insert( $"INSERT INTO [order] VALUES (null, null, {custId}, null)");
+            DateTime rightNow = DateTime.Now;
+            int index = _db.Insert( $"INSERT INTO [order] VALUES (null, '{rightNow}', {custId}, null)");
             _db.Insert( $"INSERT INTO prodOrder VALUES (null, {index}, {prodId})");
             _orders.Add(
                 new Order()
@@ -32,7 +33,7 @@ namespace Bangazon.Managers
                     id = index,
                     customerId = custId,
                     paymentTypeId = null,
-                    dateCreated = DateTime.Now.ToString()
+                    dateCreated = rightNow
                 }
             );
             return index;
@@ -50,7 +51,7 @@ namespace Bangazon.Managers
                         _orders.Add(
                             new Order(){
                                 id = reader.GetInt32(0),
-                                dateCreated = reader[1].ToString(),
+                                dateCreated = reader.GetDateTime(1),
                                 customerId = reader.GetInt32(2),
                                 paymentTypeId = reader[3] as int? ?? null
                             }

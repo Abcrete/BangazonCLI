@@ -38,8 +38,8 @@ namespace Bangazon.Managers
         // Authored by Azim
         public int AddProduct(Product newProduct){
             // Insert into DB
-            int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.productTypeId}, {newProduct.customerId}, '{newProduct.dateCreated}')");
-            
+            DateTime rightNow = DateTime.Now;
+            int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.productTypeId}, {newProduct.customerId}, '{rightNow}')");            
                 _products.Add(new Product(){
                 id = newProductId,
                 title = newProduct.title,
@@ -48,7 +48,7 @@ namespace Bangazon.Managers
                 customerId = newProduct.customerId,
                 productTypeId = newProduct.productTypeId,
                 quantity = newProduct.quantity,
-                dateCreated= newProduct.dateCreated
+                dateCreated= rightNow
             });
 
             return newProductId;

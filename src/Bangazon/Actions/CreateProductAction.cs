@@ -68,8 +68,7 @@ namespace Bangazon.Actions
             // set quantity
             Console.WriteLine("Enter Quantity");
             product.quantity = int.Parse(Console.ReadLine());
-            //set date
-            product.dateCreated = DateTime.Now;
+            
             
             // Call Method from ProductManager Class and pass in new Product Object to be added to DB  T.L. 
             prodManager.AddProduct(product);
