@@ -14,27 +14,40 @@ namespace Bangazon.Actions
     {
         public static int DoAction(CustomerManager customer)
         {
+            int choice = 0;
             // Clear Console for Menu prompts on Customer information
             Console.Clear();
-            // Call Method From CustomerManager.cs to return list of Customers   T.L.
-            List<Customer> customers = customer.GetCustomers();
-            
-            
-            int counter = 1;
+            List<Customer> customers ;
+            do {
+                // Call Method From CustomerManager.cs to return list of Customers   T.L.
+                customers = customer.GetCustomers();
+                
+                
+                int counter = 1;
 
-            Console.WriteLine("Which customer will be active?");
-            foreach (var person in customers)
-            {
-                Console.WriteLine($"{counter}. {person.Name}");
-                counter++;
-            }
+                Console.WriteLine("Which customer will be active?");
+                foreach (var person in customers)
+                {
+                    Console.WriteLine($"{counter}. {person.Name}");
+                    counter++;
+                }
 
-            Console.Write(">");
-
-            int CustomerChoice = int.Parse(Console.ReadLine());
+                Console.Write(">");
+                // Try to int parse the input and then read that customer in the customers list, catch invalid input exceptions
+                try {
+                    int CustomerChoice = int.Parse(Console.ReadLine());
+                    choice = customers[CustomerChoice - 1].CustomerId;
+                } catch(System.FormatException) {
+                    Console.Clear();
+                    Console.WriteLine("Invalid entry, try again.");
+                } catch(System.ArgumentOutOfRangeException) {
+                    Console.Clear();
+                    Console.WriteLine("Invalid entry, try again.");
+                }
+            }while(choice == 0); // repeat process if input was invalid and didn't lead to a valid choice
 
             // take the number that was entered, minus 1 to get the index position from the list. Then Print out CustomerId and Name    T.L.
-            return customers[CustomerChoice - 1].CustomerId;    
+            return choice;    
         }
     }
 }
