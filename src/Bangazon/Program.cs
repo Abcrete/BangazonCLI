@@ -66,7 +66,6 @@ namespace Bangazon
                             Console.WriteLine("Please choose a customer first");
                             break;
                         }
-
                 }
             } while(choice != 0);
         }
