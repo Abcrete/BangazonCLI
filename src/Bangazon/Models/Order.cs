@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Bangazon.Models
 {
@@ -9,10 +10,10 @@ namespace Bangazon.Models
         /*This is the primary key for the entry on the Order table.*/
         public int id {get; set;}
         /* Customer who the order belongs to */
-        public Customer customer {get; set;}
+        public int customerId {get; set;}
         /* Payment for the order, if null or is incomplete */
-        public PaymentType payment {get; set;}
+        public int? paymentTypeId {get; set;}
         /* Date order was instantialized */
-        public DateTime dateCreated {get; set;}
+        public string dateCreated {get; set;}
     }
 }
