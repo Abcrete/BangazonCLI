@@ -12,18 +12,27 @@ namespace Bangazon.Managers
         // that number will then be used in switch statement in Program.cs file
         // Authored by : Tamela Lerma
         public int ShowMenu() {
-            Console.WriteLine("*************************************************");
-            Console.WriteLine("Welcome to Bangazon! Command Line Ordering System");
-            Console.WriteLine("*************************************************");
-            Console.WriteLine("1. Create a customer account");
-            Console.WriteLine("2. Choose active customer");
-            Console.WriteLine("3. Create a payment option for a customer");
-            Console.Write("> ");
+            int choice = 0;
+            do{
+                Console.WriteLine("*************************************************");
+                Console.WriteLine("Welcome to Bangazon! Command Line Ordering System");
+                Console.WriteLine("*************************************************");
+                Console.WriteLine("1. Create a customer account");
+                Console.WriteLine("2. Choose active customer");
+                Console.WriteLine("3. Create a payment option for a customer");
+                Console.Write("> ");
 
-            // Capture key char that was entered
-            ConsoleKeyInfo enteredKey = Console.ReadKey();
-            Console.WriteLine("");
-            return int.Parse(enteredKey.KeyChar.ToString());
+                // Capture key char that was entered
+                ConsoleKeyInfo enteredKey = Console.ReadKey();
+                Console.WriteLine("");
+                try {
+                    choice = int.Parse(enteredKey.KeyChar.ToString());
+                } catch(System.FormatException) {
+                    Console.Clear();
+                    Console.WriteLine("Invalid entry, try again.");
+                }
+            } while(choice == 0);
+            return choice;
         }
     }
 }
