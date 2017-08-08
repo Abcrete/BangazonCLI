@@ -63,7 +63,7 @@ namespace Bangazon
                             CreatePaymentAction.DoAction(payment, activeCustomer);
                             break;
                         } else {
-                            Console.WriteLine("Stop being Stupid, choose a customer");
+                            Console.WriteLine("Please choose a customer first");
                             break;
                         }
 
