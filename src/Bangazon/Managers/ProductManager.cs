@@ -48,6 +48,8 @@ namespace Bangazon.Managers
                 customerId = newProduct.customerId,
                 productTypeId = newProduct.productTypeId,
                 quantity = newProduct.quantity,
+                customerId = newProduct.customerId,
+                productTypeId = newProduct.productTypeId,
                 dateCreated= newProduct.dateCreated
             });
 
@@ -83,12 +85,12 @@ namespace Bangazon.Managers
             );
             return _products;
         }
-        // This method removes a product by its id passed in from databse
+        // This method removes a product if it is not added to the order yet
         // requires id of the product
         // Authored by Azim
         public bool RemoveProduct(int id)
         {
-            _db.Insert($"DELETE FROM Product WHERE ProductID = {id}");
+            _db.Insert($"DELETE FROM product WHERE productId == {id} and productId NOT IN (SELECT o.productId FROM prodorder o)");
             return true;
         }
         // This method gets a single Product from databse

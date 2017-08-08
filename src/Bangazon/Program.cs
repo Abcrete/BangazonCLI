@@ -11,12 +11,12 @@ namespace Bangazon
         {
             // Seed the database if none exists
             var db = new DatabaseInterface("BANGAZON_TEST_DB");
+            db.CheckProdOrderTable();
             db.CheckCustomerTable();
             db.CheckOrderTable();
             db.CheckPaymentTypeTable();
             db.CheckProductTable();
             db.CheckProductTypeTable();
-            db.CheckProdOrderTable();
 
             // Create Instance of MenuManager   T.L.
             MenuManager menu = new MenuManager();
@@ -65,7 +65,7 @@ namespace Bangazon
                             CreatePaymentAction.DoAction(payment, activeCustomer);
                             break;
                         } else {
-                            Console.WriteLine("Stop being Stupid, choose a customer");
+                            Console.WriteLine("Please choose a customer first");
                             break;
                         }
                     // User will first be prompted to select an active customer
