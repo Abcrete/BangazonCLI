@@ -79,7 +79,7 @@ namespace Bangazon.Tests
         {  
             var result = _manager.AddProduct(newProduct);
             Product product = _manager.GetProduct(result);
-            Assert.True(product.ProductId == result);
+            Assert.True(product.id == result);
         }
         // Return stale product(see the req!)
 

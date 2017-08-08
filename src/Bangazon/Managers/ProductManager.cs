@@ -41,7 +41,7 @@ namespace Bangazon.Managers
             int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.customerId}, {newProduct.productTypeId}, '{newProduct.dateCreated}')");
             
                 _products.Add(new Product(){
-                ProductId = newProduct.ProductId,
+                id = newProductId,
                 title = newProduct.title,
                 description= newProduct.description,
                 price = newProduct.price,
@@ -70,7 +70,7 @@ namespace Bangazon.Managers
                     while (reader.Read ())
                     {
                         _products.Add(new Product(){
-                            ProductId = reader.GetInt32(0),
+                            id = reader.GetInt32(0),
                             title = reader[1].ToString(),
                             description = reader[2].ToString(),
                             price = reader.GetInt32(3),
@@ -94,7 +94,7 @@ namespace Bangazon.Managers
         // This method gets a single Product from databse
         // requires id of the product
         // Authored by Azim
-        public Product GetProduct(int id)  => _products.SingleOrDefault(prod => prod.ProductId == id);
+        public Product GetProduct(int id)  => _products.SingleOrDefault(prod => prod.id == id);
 
     }
 }
