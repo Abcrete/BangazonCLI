@@ -88,7 +88,7 @@ namespace Bangazon.Tests
 
         public void Dispose()
         {
-            _db.Delete("DELETE FROM product");
+            // _db.Delete("DELETE FROM product");
         }
     }
 }

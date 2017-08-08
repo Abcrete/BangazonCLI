@@ -23,6 +23,8 @@ namespace Bangazon
             CustomerManager customer = new CustomerManager(db);
             ProductTypeManager productType = new ProductTypeManager(db);
             PaymentManager payment = new PaymentManager(db);
+            ProductTypeManager prodType = new ProductTypeManager(db);
+            ProductManager productManager = new ProductManager(db);
 
             // int will hold active customer T.L.
             int activeCustomer = 0;
@@ -64,6 +66,20 @@ namespace Bangazon
                             break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
+                            break;
+                        }
+                    // User will first be prompted to select an active customer
+                    // after customer is selected, a CreateProductAction Class Method is called
+                    // this Method accepts 3 arguments: Instance of ProductManager, Instance of ProductTypeManager, and the stored int for CustomerId
+                    // Authored by : Tamela Lerma
+                    case 4: 
+                        if(activeCustomer != 0)
+                        {
+                            CreateProductAction.DoAction(productManager, activeCustomer, productType);
+                            break;
+
+                        }else {
+                            Console.WriteLine("You must choose a customer to add product to");
                             break;
                         }
                 }
