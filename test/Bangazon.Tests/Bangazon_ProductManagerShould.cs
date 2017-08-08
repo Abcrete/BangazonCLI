@@ -40,11 +40,11 @@ namespace Bangazon.Tests
                 newProduct.price = 200000; 
                 newProduct.quantity = 10;
                 customer.CustomerId = 1;
-                prodType.id = 1;
+                prodType.Id = 1;
                 newProduct.dateCreated= DateTime.Today; 
                 
             
-            var result = _manager.AddProduct(newProduct, customer, prodType);
+            var result = _manager.AddProduct(newProduct);
             Assert.True(result !=0);
         }
         // Return all the products
@@ -59,7 +59,7 @@ namespace Bangazon.Tests
         [Fact]
         public void DeleteProduct()
         {  
-            var result = _manager.AddProduct(newProduct, customer, prodType);
+            var result = _manager.AddProduct(newProduct);
             var deleted = _manager.RemoveProduct(result);
             Assert.True(deleted);
         }
@@ -67,9 +67,9 @@ namespace Bangazon.Tests
         [Fact]
         public void GetProduct()
         {  
-            var result = _manager.AddProduct(newProduct, customer, prodType);
+            var result = _manager.AddProduct(newProduct);
             Product product = _manager.GetProduct(result);
-            Assert.True(product.id == result);
+            Assert.True(product.ProductId == result);
         }
         // Return stale product(see the req!)
 

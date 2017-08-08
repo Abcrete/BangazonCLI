@@ -36,21 +36,25 @@ namespace Bangazon.Managers
         // requires 8 arguments
         // Returns ID of last Product entered
         // Authored by Azim
-        public int AddProduct(Product newProduct, Customer customer, ProductType prodType){
+        public int AddProduct(Product newProduct){
             // Insert into DB
-            int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {customer.CustomerId}, {prodType.id}, '{newProduct.dateCreated}')");
+            int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.customerId}, {newProduct.productTypeId}, '{newProduct.dateCreated}')");
             
                 _products.Add(new Product(){
-                id = newProductId,
+                ProductId = newProductId,
                 title = newProduct.title,
                 description= newProduct.description,
                 price = newProduct.price,
+                customerId = newProduct.customerId,
                 quantity = newProduct.quantity,
                 dateCreated= newProduct.dateCreated
             });
 
             return newProductId;
         }
+
+
+
         // This method gets all Products from databse
         // Dependencies/FK
         // 1. Customer table
@@ -58,8 +62,6 @@ namespace Bangazon.Managers
         // requires 8 arguments
         // Returns List of Products
         // Authored by Azim
-
-
         public List<Product> GetProducts(){
             _db.Query("select * from product",
                 (SqliteDataReader reader) => {
@@ -67,7 +69,7 @@ namespace Bangazon.Managers
                     while (reader.Read ())
                     {
                         _products.Add(new Product(){
-                            id = reader.GetInt32(0),
+                            ProductId = reader.GetInt32(0),
                             title = reader[1].ToString(),
                             description = reader[2].ToString(),
                             price = reader.GetInt32(3),
@@ -91,7 +93,7 @@ namespace Bangazon.Managers
         // This method gets a single Product from databse
         // requires id of the product
         // Authored by Azim
-        public Product GetProduct(int id)  => _products.SingleOrDefault(prod => prod.id == id);
+        public Product GetProduct(int id)  => _products.SingleOrDefault(prod => prod.ProductId == id);
 
     }
 }

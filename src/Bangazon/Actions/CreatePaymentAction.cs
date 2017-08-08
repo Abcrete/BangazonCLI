@@ -17,7 +17,10 @@ namespace Bangazon.Actions
         // Adds new Payment type class object to DB
         // Authored by : Tamela Lerma
         public static void DoAction(PaymentManager pm, int customerId)
-        {   // create new instance of payment class to set it's properties  T.L.
+        {   
+            Console.Clear();
+
+            // create new instance of payment class to set it's properties  T.L.
             PaymentType payment = new PaymentType();
         
             Console.WriteLine($"Enter payment type");
