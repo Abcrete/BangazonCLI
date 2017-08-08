@@ -16,15 +16,30 @@ namespace Bangazon.Actions
         public static void DoAction(ProductManager prodManager, int custId, ProductTypeManager prodType)
         {
             Console.Clear();
+            int counter = 1;
 
             // create new Instance of Product Type in order to set its properties   T.L.
             Product product = new Product();
-            
+
             // set CustomerId on Product Type from int that is passed in    T.L.
             product.customerId = custId;
 
-            Console.WriteLine("Enter Type of Product");
+            List<ProductType> prodList = prodType.GetProductTypes();
+            Console.WriteLine("Select Product Type");
+
+            foreach (ProductType item in prodList)
+            {
+                Console.WriteLine($"{counter}. {item.Name}");
+                counter++;
+            }
+            Console.WriteLine($"{counter}. Add New Product Type");
             Console.Write(">");
+
+            int choice = int.Parse(Console.ReadLine());
+            
+            if (counter == choice) {
+                 Console.WriteLine("Enter Type of Product");
+            }
 
             // Last Id entered into DB is returned in  a ProductTypeManager ClassMethod
             // AddProductType returns that ID
@@ -54,7 +69,7 @@ namespace Bangazon.Actions
             product.dateCreated = DateTime.Parse(Console.ReadLine());
             Console.Write(">");
             
-            // Call Method from Product Class and pass in new Product Object to be added to DB  T.L. 
+            // Call Method from ProductManager Class and pass in new Product Object to be added to DB  T.L. 
             prodManager.AddProduct(product);
         }
     }

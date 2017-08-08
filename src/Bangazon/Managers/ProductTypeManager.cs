@@ -54,7 +54,7 @@ namespace Bangazon.Managers
         // Authored by : Tamela Lerma
         public List<ProductType> GetProductTypes ()
         {
-            _db.Query("select * from Customer", (SqliteDataReader reader) =>{
+            _db.Query("select * from ProductType", (SqliteDataReader reader) =>{
                 _productTypes.Clear();
                 while(reader.Read())
                 {

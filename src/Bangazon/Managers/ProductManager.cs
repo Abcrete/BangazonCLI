@@ -41,7 +41,7 @@ namespace Bangazon.Managers
             int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.customerId}, {newProduct.productTypeId}, '{newProduct.dateCreated}')");
             
                 _products.Add(new Product(){
-                ProductId = newProductId,
+                ProductId = newProduct.ProductId,
                 title = newProduct.title,
                 description= newProduct.description,
                 price = newProduct.price,
