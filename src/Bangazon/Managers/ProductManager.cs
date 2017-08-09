@@ -113,6 +113,14 @@ namespace Bangazon.Managers
                     while (reader.Read ())
                     {
                         _staleproducts.Add(new Product(){
+        // Overloaded Method to return a list of products for a customer
+        public List<Product> GetProducts(int CustId){
+            _db.Query($"select * from product Where CustomerId = {CustId}",
+                (SqliteDataReader reader) => {
+                    _products.Clear();
+                    while (reader.Read ())
+                    {
+                        _products.Add(new Product(){
                             id = reader.GetInt32(0),
                             title = reader[1].ToString(),
                             description = reader[2].ToString(),
@@ -126,7 +134,7 @@ namespace Bangazon.Managers
             );
             return _staleproducts;
         }
-        
+
         // This method removes a product if it is not added to the order yet
         // requires id of the product
         // Authored by Azim
