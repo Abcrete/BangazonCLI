@@ -49,7 +49,7 @@ namespace Bangazon.Managers
                 quantity = newProduct.quantity,
                 customerId = newProduct.customerId,
                 productTypeId = newProduct.productTypeId,
-                dateCreated = rightNow
+                dateCreated= rightNow
             });
 
             return newProductId;

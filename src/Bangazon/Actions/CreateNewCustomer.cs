@@ -15,30 +15,43 @@ namespace Bangazon.Actions
         {
             // Clear Console for Menu prompts on Customer information
             Console.Clear();
+            string Name, Address, City, State, Zip, Phone;
 
-            Console.WriteLine("Enter Customer's Name");
-            Console.Write(">");
-            string Name = Console.ReadLine();
+            do {
+                Console.WriteLine("Enter Customer's Name");
+                Console.Write(">");
+                Name = Console.ReadLine();
+            } while(Name.Length == 0);
 
-            Console.WriteLine("Enter Customer's Street Address");
-            Console.Write(">");
-            string Address = Console.ReadLine();
+            do {
+                Console.WriteLine("Enter Customer's Street Address");
+                Console.Write(">");
+                Address = Console.ReadLine();
+            } while(Address.Length == 0);
 
-            Console.WriteLine("Enter Customer's City");
-            Console.Write(">");
-            string City = Console.ReadLine();
+            do {
+                Console.WriteLine("Enter Customer's City");
+                Console.Write(">");
+                City = Console.ReadLine();
+            } while(City.Length == 0);
+            
+            do {
+                Console.WriteLine("Enter Customer's State");
+                Console.Write(">");
+                State = Console.ReadLine();
+            } while(State.Length < 2);
 
-            Console.WriteLine("Enter Customer's State");
-            Console.Write(">");
-            string State = Console.ReadLine();
+            do {
+                Console.WriteLine("Enter Customer's Zip Code");
+                Console.Write(">");
+                Zip = Console.ReadLine();
+            } while(Zip.Length < 5 || Zip.Length > 10);
 
-            Console.WriteLine("Enter Customer's Zip Code");
-            Console.Write(">");
-            string Zip = Console.ReadLine();
-
-            Console.WriteLine("Enter Customer's Phone Number");
-            Console.Write(">");
-            string Phone = Console.ReadLine();
+            do {
+                Console.WriteLine("Enter Customer's Phone Number");
+                Console.Write(">");
+                Phone = Console.ReadLine();
+            } while(Phone.Length < 10);
 
             int customerId = register.AddCustomer(Name, Address, City, State, Zip, Phone);
             Console.WriteLine(customerId);
