@@ -109,6 +109,8 @@ namespace Bangazon.Managers
             );
             return _products;
         }
+
+
         /* This method gets all Stale Products from databse
          Dependencies/FK
          1. Customer table

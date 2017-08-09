@@ -15,5 +15,7 @@ namespace Bangazon.Models
         public int? paymentTypeId {get; set;}
         /* Date order was instantialized */
         public DateTime dateCreated {get; set;}
+        /* Total for all items in the order */
+        public double total {get; set;}
     }
 }
