@@ -27,7 +27,6 @@ namespace Bangazon
             ProductManager product = new ProductManager(db);
             OrderManager order = new OrderManager(db);
 
-
             // int will hold active customer T.L.
             int activeCustomer = 0;
 
@@ -82,6 +81,9 @@ namespace Bangazon
 
                         }else {
                             Console.WriteLine("You must choose a customer to add product to");
+                            break;
+                        }
+                    
                     // User will need to first select a active customer
                     // once customer is selected
                     // a Method in AddProductToCartAction is called which 
@@ -94,6 +96,20 @@ namespace Bangazon
                             break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
+                            break;
+                        }
+                    // User will first be prompted to select a customer
+                    // after customer is selected, a DeleteProductAction Class Method is called
+                    // this Method accepts 2 arguments: Instance of ProductManager and the stored int for CustomerId
+                    // Will Delete Customer Products in DB
+                    // Authored by : Tamela Lerma
+                    case 7: 
+                        if (activeCustomer != 0)
+                        {
+                            DeleteProductAction.DoAction(product, activeCustomer);
+                            break;
+                        } else {
+                            Console.WriteLine("You must enter a customer first");
                             break;
                         }
                 }

@@ -17,13 +17,14 @@ namespace Bangazon.Actions
         {
             Console.Clear();
             int counter = 1;
-
-            // create new Instance of Product Type in order to set its properties   T.L.
+            int prodTypeId;
+            int choice; // used to store selected menu key value  T.L.
+            bool isANumber = true; // used to check that number value is entered   T.L.
             Product product = new Product();
-
-            // set CustomerId on Product Type from int that is passed in    T.L.
-
+            product.customerId = custId; // set CustomerId on Product from int that is passed in DoAction Method    T.L.
+            
             List<ProductType> prodList = prodType.GetProductTypes();
+
             Console.WriteLine("Select Product Type");
 
             foreach (ProductType item in prodList)
@@ -34,12 +35,10 @@ namespace Bangazon.Actions
             Console.WriteLine($"{counter}. Add New Product Type");
             Console.Write(">");
 
-            product.customerId = custId;
-
-            int choice = int.Parse(Console.ReadLine());
-            int prodTypeId;
-            
+            choice = int.Parse(Console.ReadLine());
+           
             if (counter == choice) {
+                Console.Clear();
                 Console.WriteLine("Enter Type of Product");
                 prodTypeId = prodType.AddProductType(Console.ReadLine());
             }else {
@@ -53,23 +52,50 @@ namespace Bangazon.Actions
             // Authored By : Tamela Lerma
             // The ProductTypeId property for product is set from this variable  T.L.
 
-            // set title
-            Console.WriteLine("Enter Product Name");
-            product.title = Console.ReadLine();
-            Console.Write(">");
-            // set description
-            Console.WriteLine("Enter Product Description");
-            product.description = Console.ReadLine();
-            Console.Write(">");
-            // set price
-            Console.WriteLine("Enter Product Price");
-            product.price = double.Parse(Console.ReadLine());
-            Console.Write(">");
-            // set quantity
-            Console.WriteLine("Enter Quantity");
-            product.quantity = int.Parse(Console.ReadLine());
-            
-            
+            do {
+                // set title
+                Console.WriteLine("Enter Product Name");
+                product.title = Console.ReadLine();
+                Console.Write(">");
+            } while (product.title == "");
+
+            do {
+                // set description
+                Console.WriteLine("Enter Product Description");
+                product.description = Console.ReadLine();
+                Console.Write(">");
+            } while (product.description == "");
+
+
+            do {
+                Console.WriteLine("Enter Product Price");
+                try {
+                    // set price
+                    product.price = double.Parse(Console.ReadLine());
+                    Console.Write(">");
+                    isANumber = true;
+                } catch(System.FormatException) {
+                    Console.Clear();
+                    Console.WriteLine("Invalid entry, try again.");
+                    isANumber = false;
+                }
+            }while (isANumber  == false);
+
+
+            do{
+                Console.WriteLine("Enter Quantity");
+                try {
+                    // set quantity
+                    product.quantity = int.Parse(Console.ReadLine());
+                    Console.Write(">");
+                    isANumber = true;
+                } catch (System.FormatException) {
+                    Console.Clear();
+                    Console.WriteLine("Invalid entry, try again.");
+                    isANumber = false;
+                }
+            } while (isANumber == false);
+          
             // Call Method from ProductManager Class and pass in new Product Object to be added to DB  T.L. 
             prodManager.AddProduct(product);
         }
