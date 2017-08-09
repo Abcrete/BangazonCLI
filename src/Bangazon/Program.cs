@@ -25,6 +25,7 @@ namespace Bangazon
             PaymentManager payment = new PaymentManager(db);
             ProductTypeManager prodType = new ProductTypeManager(db);
             ProductManager productManager = new ProductManager(db);
+            
 
             // int will hold active customer T.L.
             int activeCustomer = 0;
@@ -80,6 +81,15 @@ namespace Bangazon
 
                         }else {
                             Console.WriteLine("You must choose a customer to add product to");
+                            break;
+                        }
+                    case 7: 
+                        if(activeCustomer != 0)
+                        {
+                            DeleteProductAction.DoAction(productManager, activeCustomer);
+                            break;
+                        }else {
+                            Console.WriteLine("You must enter a customer first");
                             break;
                         }
                 }
