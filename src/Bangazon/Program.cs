@@ -83,6 +83,7 @@ namespace Bangazon
                             Console.WriteLine("You must choose a customer to add product to");
                             break;
                         }
+                    
                     // User will need to first select a active customer
                     // once customer is selected
                     // a Method in AddProductToCartAction is called which 

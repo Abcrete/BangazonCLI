@@ -95,7 +95,7 @@ namespace Bangazon.Actions
                     isANumber = false;
                 }
             } while (isANumber == false);
-            
+          
             // Call Method from ProductManager Class and pass in new Product Object to be added to DB  T.L. 
             prodManager.AddProduct(product);
         }
