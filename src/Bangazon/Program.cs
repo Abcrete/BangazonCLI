@@ -82,6 +82,8 @@ namespace Bangazon
 
                         }else {
                             Console.WriteLine("You must choose a customer to add product to");
+                            break;
+                        }
                     // User will need to first select a active customer
                     // once customer is selected
                     // a Method in AddProductToCartAction is called which 
@@ -91,6 +93,15 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             AddProductToCartAction.DoAction(order, product, activeCustomer);
+                            break;
+                        } else {
+                            Console.WriteLine("Please choose a customer first");
+                            break;
+                        }
+                    case 6:
+                        if (activeCustomer != 0)
+                        {
+                            CompleteOrderAction.DoAction(activeCustomer, payment, order);
                             break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
