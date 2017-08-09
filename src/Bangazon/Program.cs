@@ -39,6 +39,7 @@ namespace Bangazon
                 // Display Menu from MenuManager 
                 // Save selected int to choice  T.L
                 choice = menu.ShowMenu();
+                Console.Clear();
 
                 switch (choice)
                 {
@@ -98,6 +99,12 @@ namespace Bangazon
                             Console.WriteLine("Please choose a customer first");
                             break;
                         }
+                    // User will be prompted to first choose active customer
+                    // then will call Method in CompleteOrderAction which
+                    // References PaymentManager and OrderManager 
+                    // checks that payment exists for customer
+                    // payment is added to an order
+                    // Authored by : Jason Smith & Tamela Lerma
                     case 6:
                         if (activeCustomer != 0)
                         {
