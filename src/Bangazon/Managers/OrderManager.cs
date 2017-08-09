@@ -103,5 +103,25 @@ namespace Bangazon.Managers
             );
             return _report;
         }
+
+        /*  Return a total for all products in a customers order
+            Authored by Jason Smith */
+        public Order OrderTotal(int custId)
+        {
+            
+            Order custOrder = new Order();
+            custOrder.id = 0;
+            _db.Query($"SELECT  p.Price, o.orderId FROM [order] o LEFT JOIN prodOrder po ON po.orderId = o.orderId LEFT JOIN product p ON p.productId = po.productId WHERE o.customerId = {custId} AND o.paymentTypeId IS NULL",
+                (SqliteDataReader reader) => {
+                    while(reader.Read())
+                    {
+                        custOrder.total += reader.GetDouble(0);
+                        custOrder.id = reader.GetInt32(1);
+
+                    }
+                }
+            );
+            return custOrder;
+        }
     }
 }
