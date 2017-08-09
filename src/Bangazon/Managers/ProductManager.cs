@@ -24,7 +24,7 @@ namespace Bangazon.Managers
         Authored by : Aarti Jaisinghani
         */
 
-         private List<Product> _staleproducts = new List<Product>();
+        
 
         private DatabaseInterface _db;
 
@@ -130,19 +130,36 @@ namespace Bangazon.Managers
          */
 
         public List<Product> GetStaleProducts(){
-            _db.Query("select * from product p where productid not in (select productid from prodorder) and cast(julianday(datetime('now')) -  julianday(createdate as integer)  > 180 union select * from product p where productid in (select productid from prodorder po join `order` o on po.orderid = o.orderid where o.paymenttypeid is null and cast(julianday(datetime('now')) -  julianday(o.datecreated) as integer) > 90) union select * from product p where p.productid in (select po.productid from prodorder po join `order` o on po.orderid = o.orderid join product p on p.productid =po.productidwhere o.paymenttypeid is not null and cast(julianday(datetime('now')) -  julianday(p.createdate) as integer) > 180 and p.quantity>(select count(t2.productid)from product t1 join prodorder t2 on t1.productid = t2.productid group by t1.productid))",
+            List<Product> _staleproducts = new List<Product>();
+            _db.Query(@"select * from product p 
+                    where productid not in (select productid from prodorder) 
+                    and cast(julianday(datetime('now')) -  julianday(createdate) as integer)  > 180 
+                    
+                    union 
+                    
+                    select * from product p 
+                    where productid in (
+                        select productid from prodorder po 
+                        join `order` o on po.orderid = o.orderid 
+                        where o.paymenttypeid is null 
+                        and cast(julianday(datetime('now')) -  julianday(o.datecreated) as integer) > 90) 
+                        
+                        union 
+                        
+                        select * from product p 
+                        where p.productid in (
+                            select po.productid from prodorder po 
+                            join `order` o on po.orderid = o.orderid 
+                            join product p on p.productid =po.productid 
+                            where o.paymenttypeid is not null 
+                            and cast(julianday(datetime('now')) -  julianday(p.createdate) as integer) > 180 
+                            and p.quantity>(select count(t2.productid)from product t1 join prodorder t2 on t1.productid = t2.productid group by t1.productid))",
                 (SqliteDataReader reader) => {
-                    _staleproducts.Clear();
                     while (reader.Read ())
                     {
                         _staleproducts.Add(new Product(){
                             id = reader.GetInt32(0),
-                            title = reader[1].ToString(),
-                            description = reader[2].ToString(),
-                            price = reader.GetInt32(3),
-                            customerId = reader.GetInt32(4),
-                            productTypeId = reader.GetInt32(5),
-                            dateCreated = reader.GetDateTime(7)
+                            title = reader[1].ToString()
                         });
                     }
                 }

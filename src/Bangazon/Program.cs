@@ -127,6 +127,9 @@ namespace Bangazon
                             Console.WriteLine("You must enter a customer first");
                             break;
                         }
+                    case 9:
+                        GetStaleProducts.DoAction(product);
+                        break;
                 }
             } while(choice != 0);
         }
