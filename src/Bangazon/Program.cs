@@ -127,9 +127,24 @@ namespace Bangazon
                             Console.WriteLine("You must enter a customer first");
                             break;
                         }
+                    // User will need to first select a active customer
+                    // once customer is selected
+                    // a Method in UpdateProduct is called which 
+                    // calls a Method in ProductManager update the product of the customer
+                    // Authored by : Azim
+                    case 8: 
+                        if (activeCustomer != 0)
+                        {
+                            UpdateProduct.DoAction(product, activeCustomer);
+                            break;
+                        } else {
+                            Console.WriteLine("You must enter a customer first");
+                            break;
+                        }
                     case 9:
                         GetStaleProducts.DoAction(product);
                         break;
+
                 }
             } while(choice != 0);
         }

@@ -88,6 +88,7 @@ namespace Bangazon.Managers
             return _products;
         }
 
+
         // Overloaded Method to return a list of products for a customer
         public List<Product> GetProducts(int CustId){
             _db.Query($"select * from product Where CustomerId = {CustId}",
@@ -174,6 +175,13 @@ namespace Bangazon.Managers
         {
             _db.Insert($"DELETE FROM product WHERE productId == {id} and productId NOT IN (SELECT o.productId FROM prodorder o)");
             return true;
+        }
+        // Method for updating the product
+        // requires id of the product, column name and new value
+        // Authored by Azim
+        public void UpdateProduct(int id, string what, string value)
+        {
+            _db.Insert($"Update product set '{what}' = '{value}' where productId == {id};");
         }
         // This method gets a single Product from databse
         // requires id of the product
