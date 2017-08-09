@@ -20,6 +20,12 @@ namespace Bangazon.Managers
         // Product will be added to this list when GetProducts Method makes a call to the DB     T.L
         private List<Product> _products = new List<Product>();
 
+        /* Product will be added to this list when GetStaleProducts Method makes a call to the DB  
+        Authored by : Aarti Jaisinghani
+        */
+
+         private List<Product> _staleproducts = new List<Product>();
+
         private DatabaseInterface _db;
 
         // An instance of DatabaseInterface is made in the Program.cs file
@@ -38,8 +44,7 @@ namespace Bangazon.Managers
         // Authored by Azim
         public int AddProduct(Product newProduct){
             // Insert into DB
-            DateTime rightNow = DateTime.Now;
-            int newProductId = _db.Insert($"INSERT INTO product VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.productTypeId}, {newProduct.customerId}, '{rightNow}')");            
+            int newProductId = _db.Insert($"INSERT INTO product (productId, title, description, price, quantity, customerId, productTypeId) VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.customerId}, {newProduct.productTypeId})");
                 _products.Add(new Product(){
                 id = newProductId,
                 title = newProduct.title,
@@ -47,8 +52,7 @@ namespace Bangazon.Managers
                 price = newProduct.price,
                 customerId = newProduct.customerId,
                 productTypeId = newProduct.productTypeId,
-                quantity = newProduct.quantity,
-                dateCreated= rightNow
+                quantity = newProduct.quantity
             });
 
             return newProductId;
@@ -84,6 +88,31 @@ namespace Bangazon.Managers
             return _products;
         }
 
+        /* This method gets all Stale Products from databse
+         Dependencies/FK
+         1. Customer table
+         2. ProductType table
+         requires 8 arguments
+         Returns List of Products
+
+        Given a user wants to see products that aren't selling
+        When the user selects the option to view stale products
+        Then the user should be presented with a list of all products that meet any of the following criteria
+
+        Has never been added to an order, and has been in the system for more than 180 days
+        Has been added to an order, but the order hasn't been completed, and the order was created more than 90 days ago
+        Has been added to one, or more orders, and the order were completed, but there is remaining quantity for the product, and the product has been in the system for more than 180 days
+        
+        Authored by Aarti Jaisinghani
+         */
+
+        public List<Product> GetStaleProducts(){
+            _db.Query("select * from product p where productid not in (select productid from prodorder) and cast(julianday(datetime('now')) -  julianday(createdate as integer)  > 180 union select * from product p where productid in (select productid from prodorder po join `order` o on po.orderid = o.orderid where o.paymenttypeid is null and cast(julianday(datetime('now')) -  julianday(o.datecreated) as integer) > 90) union select * from product p where p.productid in (select po.productid from prodorder po join `order` o on po.orderid = o.orderid join product p on p.productid =po.productidwhere o.paymenttypeid is not null and cast(julianday(datetime('now')) -  julianday(p.createdate) as integer) > 180 and p.quantity>(select count(t2.productid)from product t1 join prodorder t2 on t1.productid = t2.productid group by t1.productid))",
+                (SqliteDataReader reader) => {
+                    _staleproducts.Clear();
+                    while (reader.Read ())
+                    {
+                        _staleproducts.Add(new Product(){
         // Overloaded Method to return a list of products for a customer
         public List<Product> GetProducts(int CustId){
             _db.Query($"select * from product Where CustomerId = {CustId}",
@@ -103,7 +132,7 @@ namespace Bangazon.Managers
                     }
                 }
             );
-            return _products;
+            return _staleproducts;
         }
 
         // This method removes a product if it is not added to the order yet
