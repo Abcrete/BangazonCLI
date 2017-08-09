@@ -17,22 +17,27 @@ namespace Bangazon.Actions
         // Adds new Payment type class object to DB
         // Authored by : Tamela Lerma
         public static void DoAction(PaymentManager pm, int customerId)
-        {   // create new instance of payment class to set it's properties  T.L.
+        {   
+            Console.Clear();
+
+            // create new instance of payment class to set it's properties  T.L.
             PaymentType payment = new PaymentType();
         
             // Store entered value as PaymentType property Type  T.L.
+            // Do this action if value not empty J.S.
             do {
                 Console.WriteLine($"Enter payment type");
                 Console.Write(">");
                 payment.Type = Console.ReadLine();
             }while(payment.Type == "");
             // Store entered value as PaymentType property AccountNumber  T.L.
+             // Do this action if value not empty  J.S.
             do {
                 Console.WriteLine("Enter Account Number");
                 Console.Write(">");
                 payment.AccountNumber = Console.ReadLine();
             }while(payment.AccountNumber == "");
-            // Call methid in PaymentManager Class that adds the object to the DB   T.L.
+            // Call method in PaymentManager Class that adds the object to the DB   T.L.
             pm.AddPaymentToCustomer(payment, customerId); 
         }
 
