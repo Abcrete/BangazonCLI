@@ -17,7 +17,7 @@ namespace Bangazon.Actions
               Console.WriteLine("List of Stale Products");
               Console.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%");
               List<Product> staleprod = pm.GetStaleProducts();
-              Console.WriteLine(staleprod.Count);
+              //Console.WriteLine(staleprod.Count);
               int counter = 1;
               foreach(Product prod in staleprod)
               {
