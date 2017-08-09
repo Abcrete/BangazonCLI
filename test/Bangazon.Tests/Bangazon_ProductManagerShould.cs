@@ -79,10 +79,6 @@ namespace Bangazon.Tests
             Product product = _manager.GetProduct(result);
             Assert.True(product.id == result);
         }
-        // Return stale product(see the req!)
-
-        // Return most popular product
-
 
         public void Dispose()
         {
