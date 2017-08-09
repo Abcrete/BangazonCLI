@@ -18,6 +18,7 @@ namespace Bangazon.Tests
             _manager = new OrderManager(_db);  // initialize OrderManager
         }
 
+
         [Fact]
         public void CreateNewOrder()
         {
@@ -36,6 +37,7 @@ namespace Bangazon.Tests
             }
             Assert.True(orders.Count > 0);
         }
+
 
         [Fact]
         public void AddPaymentTypeToOrder()
@@ -59,3 +61,4 @@ namespace Bangazon.Tests
         }
     }
 }
+

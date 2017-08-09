@@ -45,19 +45,21 @@ namespace Bangazon.Managers
         public int AddProduct(Product newProduct){
             // Insert into DB
             int newProductId = _db.Insert($"INSERT INTO product (productId, title, description, price, quantity, customerId, productTypeId) VALUES (null, '{newProduct.title}', '{newProduct.description}', {newProduct.price}, {newProduct.quantity}, {newProduct.customerId}, {newProduct.productTypeId})");
-            
                 _products.Add(new Product(){
                 id = newProductId,
                 title = newProduct.title,
                 description= newProduct.description,
                 price = newProduct.price,
-                quantity = newProduct.quantity,
                 customerId = newProduct.customerId,
-                productTypeId = newProduct.productTypeId
+                productTypeId = newProduct.productTypeId,
+                quantity = newProduct.quantity
             });
 
             return newProductId;
         }
+
+
+
         // This method gets all Products from databse
         // Dependencies/FK
         // 1. Customer table
@@ -65,8 +67,6 @@ namespace Bangazon.Managers
         // requires 8 arguments
         // Returns List of Products
         // Authored by Azim
-
-
         public List<Product> GetProducts(){
             _db.Query("select * from product",
                 (SqliteDataReader reader) => {

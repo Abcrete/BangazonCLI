@@ -48,9 +48,6 @@ namespace Bangazon.Tests
                 newProduct.quantity = 10;
                 newProduct.customerId = 1;
                 newProduct.productTypeId = 1;
-               
-               
-            
             var result = _manager.AddProduct(newProduct);
             Assert.True(result !=0);
         }
@@ -96,7 +93,9 @@ namespace Bangazon.Tests
 
         public void Dispose()
         {
-           // _db.Delete("DELETE FROM product");
+
+            // _db.Delete("DELETE FROM product");
+
         }
     }
 }
