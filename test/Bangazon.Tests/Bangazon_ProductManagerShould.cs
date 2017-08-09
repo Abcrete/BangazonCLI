@@ -48,8 +48,8 @@ namespace Bangazon.Tests
                 newProduct.quantity = 10;
                 newProduct.customerId = 1;
                 newProduct.productTypeId = 1;
-                newProduct.dateCreated= DateTime.Today; 
-                
+               
+               
             
             var result = _manager.AddProduct(newProduct);
             Assert.True(result !=0);
@@ -60,6 +60,14 @@ namespace Bangazon.Tests
         public void GetAllProducts()
         {            
             var products = _manager.GetProducts();
+            Assert.IsType<List<Product>>(products);
+        }
+
+        // Return all the stale products
+        // Authored by Aarti Jaisinghani
+        public void GetAllStaleProducts()
+        {            
+            var products = _manager.GetStaleProducts();
             Assert.IsType<List<Product>>(products);
         }
         
@@ -88,7 +96,7 @@ namespace Bangazon.Tests
 
         public void Dispose()
         {
-            _db.Delete("DELETE FROM product");
+           // _db.Delete("DELETE FROM product");
         }
     }
 }

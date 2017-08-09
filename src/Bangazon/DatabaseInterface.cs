@@ -340,7 +340,7 @@ namespace Bangazon
                             `Quantity`	int not null,
                             `ProductTypeID`	integer not null,
                             `CustomerID`	integer not null,
-                            `CreateDate`   varchar(80) not null,
+                            `CreateDate`    DATE DEFAULT (datetime('now','localtime')),
                             FOREIGN KEY(`CustomerID`) REFERENCES `Customer`(`CustomerID`),
                             FOREIGN KEY(`ProductTypeID`) REFERENCES `ProductType`(`ProductTypeID`)
                         )";
