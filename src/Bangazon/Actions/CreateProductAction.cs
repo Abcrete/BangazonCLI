@@ -17,15 +17,14 @@ namespace Bangazon.Actions
         {
             Console.Clear();
             int counter = 1;
-            // used to check that number value is entered   T.L.
-            bool isANumber = true;
-
-            // create new Instance of Product Type in order to set its properties   T.L.
+            int prodTypeId;
+            int choice; // used to store selected menu key value  T.L.
+            bool isANumber = true; // used to check that number value is entered   T.L.
             Product product = new Product();
-
-            // set CustomerId on Product Type from int that is passed in    T.L.
-
+            product.customerId = custId; // set CustomerId on Product from int that is passed in DoAction Method    T.L.
+            
             List<ProductType> prodList = prodType.GetProductTypes();
+
             Console.WriteLine("Select Product Type");
 
             foreach (ProductType item in prodList)
@@ -36,11 +35,8 @@ namespace Bangazon.Actions
             Console.WriteLine($"{counter}. Add New Product Type");
             Console.Write(">");
 
-            product.customerId = custId;
-
-            int choice = int.Parse(Console.ReadLine());
-            int prodTypeId;
-            
+            choice = int.Parse(Console.ReadLine());
+           
             if (counter == choice) {
                 Console.Clear();
                 Console.WriteLine("Enter Type of Product");
