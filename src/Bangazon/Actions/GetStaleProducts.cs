@@ -17,6 +17,11 @@ namespace Bangazon.Actions
               Console.WriteLine("List of Stale Products");
               Console.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%");
               List<Product> staleprod = pm.GetStaleProducts();
+              if(staleprod.Count == 0) {
+                  Console.WriteLine("There are no stale products");
+                  return;
+              }
+
               //Console.WriteLine(staleprod.Count);
               int counter = 1;
               foreach(Product prod in staleprod)
@@ -29,10 +34,6 @@ namespace Bangazon.Actions
               }
               Console.Write ("> ");
               Console.ReadKey();
-
-
          }
      }
-
-
 }

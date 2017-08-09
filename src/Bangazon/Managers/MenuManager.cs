@@ -27,17 +27,15 @@ namespace Bangazon.Managers
                 Console.WriteLine("7. Remove customer product");
                 Console.WriteLine("8. Update product information");
                 Console.WriteLine("9. Show stale products");
-                Console.WriteLine("10. Show customer revenue report");
-                Console.WriteLine("11. Show overall product popularity");
-                Console.WriteLine("12. Leave Bangazon!");
+                Console.WriteLine("10. Leave Bangazon!");
                 Console.Write("> ");
 
 
                 // Capture key char that was entered
-                ConsoleKeyInfo enteredKey = Console.ReadKey();
+                String enteredKey = Console.ReadLine();
                 Console.WriteLine("");
                 try {
-                    choice = int.Parse(enteredKey.KeyChar.ToString());
+                    choice = int.Parse(enteredKey);
                 } catch(System.FormatException) {
                     Console.Clear();
                     Console.WriteLine("Invalid entry, try again.");

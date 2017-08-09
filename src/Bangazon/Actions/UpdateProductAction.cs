@@ -31,6 +31,10 @@ namespace Bangazon.Actions
                         // Get all the products for the customer
                         var products = pm.GetProducts(customerId);
                         int counter = 1;
+                        if(products.Count == 0) {
+                            Console.WriteLine("Customer has no products.");
+                            return;
+                        }
                         Console.WriteLine($"Select a product to update:");
                         foreach (var item in products)
                         {

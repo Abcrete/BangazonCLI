@@ -21,9 +21,7 @@
 7. Remove customer product
 8. Update product information
 9. Show stale products
-10. Show customer revenue report
-11. Show overall product popularity
-12. Leave Bangazon!
+10. Leave Bangazon!
 >
 ```
 
