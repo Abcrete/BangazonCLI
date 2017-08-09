@@ -21,35 +21,48 @@ namespace Bangazon.Actions
         {   // create new instance of order and product class to set it's properties
             // Authored by : Azim
                 int choice;
-                do
-                {
-                    // get all products in the system
-                    // Authored by : Azim
-                    var products = pm.GetProducts();
+                int count;
+                // Main try catch block to catch the exception caused by entering incorrect character
+                try
+                {    
+                    do
+                    {
+                        // get all products in the system
+                        // Authored by : Azim
+                        Console.Clear();
+                        var products = pm.GetProducts();
+                        int counter = 1;
+                        Console.WriteLine($"Please choose a product to add to cart");
+                        foreach (var item in products)
+                        {
+                            Console.WriteLine($"{counter++}. {item.title}");
+                        }
+                        Console.WriteLine($"Press {counter} to quit");
+                        count = counter;
+                        Console.Write(">");
+
+                        int CustomerChoice = int.Parse(Console.ReadLine());
                     
-                    Console.WriteLine($"Please choose a product to add to cart");
-                    int counter = 1;    
-                    foreach (var item in products)
-                    {
-                        Console.WriteLine($"{counter++}. {item.title}");
-                    }
-                    Console.WriteLine($"Press {counter} to quit");
-                    Console.Write(">");
-                    int CustomerChoice = int.Parse(Console.ReadLine());
-                    choice = CustomerChoice;
-                    // I put these methods in the try catch block to catch a exception
-                    // Authored by : Azim
-                    try
-                    {
-                        //This method will identify the product id from the array of products
-                        var prodId = products[CustomerChoice - 1].id;
-                        //Create order method is called to create a an order and it will return id of created order
-                        var orderId = om.CreateOrder(prodId, customerId);
-                    }catch(ArgumentOutOfRangeException)
-                    {
-                        Console.WriteLine("Thanks for adding order to the cart!");
-                    }
-                }while(choice != 0);
+                        choice = CustomerChoice;
+                        // I put these methods in the try catch block to catch a exception
+                        // Authored by : Azim
+                        try
+                        {
+                            //This method will identify the product id from the array of products
+                            var prodId = products[CustomerChoice - 1].id;
+                            //Create order method is called to create a an order and it will return id of created order
+                            var orderId = om.CreateOrder(prodId, customerId);
+                        }catch(ArgumentOutOfRangeException)
+                        {
+                            Console.WriteLine("Thanks for adding order to the cart!");
+                        }
+                    }while(choice != count);
+                    
+                }catch(FormatException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Incorrect Input! Please enter only numbers");
+                }
         }
 
     }

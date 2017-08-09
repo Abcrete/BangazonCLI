@@ -36,6 +36,7 @@ namespace Bangazon.Managers
             if(index == 0) {
                 index = _db.Insert( $"INSERT INTO [order] VALUES (null, '{rightNow}', {custId}, null)");
             }
+
             _db.Insert( $"INSERT INTO prodOrder VALUES (null, {index}, {prodId})");
             _orders.Add(
                 new Order()

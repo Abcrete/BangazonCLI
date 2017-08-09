@@ -23,6 +23,7 @@ namespace Bangazon
             CustomerManager customer = new CustomerManager(db);
             ProductTypeManager productType = new ProductTypeManager(db);
             PaymentManager payment = new PaymentManager(db);
+            ProductTypeManager prodType = new ProductTypeManager(db);
             ProductManager product = new ProductManager(db);
             OrderManager order = new OrderManager(db);
 
@@ -69,6 +70,20 @@ namespace Bangazon
                             Console.WriteLine("Please choose a customer first");
                             break;
                         }
+                    // User will first be prompted to select an active customer
+                    // after customer is selected, a CreateProductAction Class Method is called
+                    // this Method accepts 3 arguments: Instance of ProductManager, Instance of ProductTypeManager, and the stored int for CustomerId
+                    // Authored by : Tamela Lerma
+                    case 4: 
+                        if(activeCustomer != 0)
+                        {
+                            CreateProductAction.DoAction(product, activeCustomer, productType);
+                            break;
+
+                        }else {
+                            Console.WriteLine("You must choose a customer to add product to");
+                            break;
+                        }
                     // User will need to first select a active customer
                     // once customer is selected
                     // a Method in AddProductToCartAction is called which 
@@ -78,6 +93,15 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             AddProductToCartAction.DoAction(order, product, activeCustomer);
+                            break;
+                        } else {
+                            Console.WriteLine("Please choose a customer first");
+                            break;
+                        }
+                    case 6:
+                        if (activeCustomer != 0)
+                        {
+                            CompleteOrderAction.DoAction(activeCustomer, payment, order);
                             break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
