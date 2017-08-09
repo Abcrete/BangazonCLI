@@ -4,6 +4,7 @@ using Bangazon.Managers;
 using Bangazon.Models;
 using Xunit;
 
+// Authored by Jason Smith
 namespace Bangazon.Tests
 {
     public class OrderManagerShould
