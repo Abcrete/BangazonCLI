@@ -28,6 +28,8 @@ namespace Bangazon.Managers
                 Console.WriteLine("8. Update product information");
                 Console.WriteLine("9. Show stale products");
                 Console.WriteLine("10. Show customer revenue report");
+                Console.WriteLine("11. Show overall product popularity");
+                Console.WriteLine("12. Leave Bangazon!");
                 Console.Write("> ");
 
 
