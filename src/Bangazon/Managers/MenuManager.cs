@@ -22,6 +22,7 @@ namespace Bangazon.Managers
                 Console.WriteLine("2. Choose active customer");
                 Console.WriteLine("3. Create a payment option for a customer");
                 Console.WriteLine("4. Add product to sell");
+                Console.WriteLine("5. Add product to shopping cart");
                 Console.Write("> ");
 
                 // Capture key char that was entered
