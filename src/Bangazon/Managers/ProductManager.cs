@@ -87,28 +87,7 @@ namespace Bangazon.Managers
             );
             return _products;
         }
-         // Overloaded Method to return a list of products for a customer
-        public List<Product> GetProducts(int CustId){
-            _db.Query($"select * from product Where CustomerId = {CustId}",
-                (SqliteDataReader reader) => {
-                    _products.Clear();
-                    while (reader.Read ())
-                    {
-                        _products.Add(new Product(){
-                            id = reader.GetInt32(0),
-                            title = reader[1].ToString(),
-                            description = reader[2].ToString(),
-                            price = reader.GetInt32(3),
-                            quantity = reader.GetInt32(4),
-                            customerId = reader.GetInt32(5),
-                            productTypeId = reader.GetInt32(6),
-                            dateCreated = reader.GetDateTime(7)
-                        });
-                    }
-                }
-            );
-            return _products;
-        }
+
 
         // Overloaded Method to return a list of products for a customer
         public List<Product> GetProducts(int CustId){
