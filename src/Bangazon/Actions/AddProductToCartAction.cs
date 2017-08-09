@@ -22,6 +22,7 @@ namespace Bangazon.Actions
             // Authored by : Azim
                 int choice;
                 int count;
+                // Main try catch block to catch the exception caused by entering incorrect character
                 try
                 {    
                     do
