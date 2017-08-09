@@ -27,12 +27,13 @@ namespace Bangazon.Managers
         {
             DateTime rightNow = DateTime.Now;
             int index = 0;
-            try {
-                _db.Query($"SELECT orderId FROM [order] WHERE customerId = {custId} AND paymentTypeId IS NULL", (SqliteDataReader reader) => {
+            _db.Query($"SELECT orderId FROM [order] WHERE customerId = {custId} AND paymentTypeId IS NULL", (SqliteDataReader reader) => {
+                    while(reader.Read()) {
                         index = reader.GetInt32(0);
                     }
-                );
-            }catch (System.InvalidOperationException) {
+                }
+            );
+            if(index == 0) {
                 index = _db.Insert( $"INSERT INTO [order] VALUES (null, '{rightNow}', {custId}, null)");
             }
             _db.Insert( $"INSERT INTO prodOrder VALUES (null, {index}, {prodId})");
