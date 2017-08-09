@@ -144,7 +144,8 @@ namespace Bangazon
                     case 9:
                         GetStaleProducts.DoAction(product);
                         break;
-
+                    case 10:
+                        return;
                 }
             } while(choice != 0);
         }
