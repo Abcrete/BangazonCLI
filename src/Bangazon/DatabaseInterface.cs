@@ -337,7 +337,7 @@ namespace Bangazon
                             `Title`	varchar(80) not null, 
                             `Description`	varchar(1000) not null, 
                             `Price`	double not null,
-                            `Quantity`	int not null,
+                            `Quantity`	integer not null,
                             `ProductTypeID`	integer not null,
                             `CustomerID`	integer not null,
                             `CreateDate`   DATE DEFAULT (datetime('now','localtime')),

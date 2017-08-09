@@ -25,13 +25,6 @@ namespace Bangazon.Tests
         {
             _db = new DatabaseInterface("BANGAZON_TEST_DB");
             _manager = new ProductManager(_db);
-                      
-            _db.CheckCustomerTable();
-            _db.CheckOrderTable();
-            _db.CheckPaymentTypeTable();
-            _db.CheckProductTable();
-            _db.CheckProductTypeTable();
-            _db.CheckProdOrderTable();
             _db.CheckProductTable();
 
         }
@@ -42,12 +35,12 @@ namespace Bangazon.Tests
         [Fact]
         public void AddNewProduct()
         {
-                newProduct.title = "Rocket"; 
-                newProduct.description= "It flies"; 
-                newProduct.price = 200000; 
-                newProduct.quantity = 10;
-                newProduct.customerId = 1;
-                newProduct.productTypeId = 1;
+            newProduct.title = "Rocket"; 
+            newProduct.description= "It flies"; 
+            newProduct.price = 200000; 
+            newProduct.quantity = 10;
+            newProduct.customerId = 1;
+            newProduct.productTypeId = 1;
             var result = _manager.AddProduct(newProduct);
             Assert.True(result !=0);
         }
@@ -94,7 +87,7 @@ namespace Bangazon.Tests
         public void Dispose()
         {
 
-            // _db.Delete("DELETE FROM product");
+            _db.Delete("DELETE FROM product");
 
         }
     }

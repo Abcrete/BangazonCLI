@@ -87,6 +87,28 @@ namespace Bangazon.Managers
             );
             return _products;
         }
+         // Overloaded Method to return a list of products for a customer
+        public List<Product> GetProducts(int CustId){
+            _db.Query($"select * from product Where CustomerId = {CustId}",
+                (SqliteDataReader reader) => {
+                    _products.Clear();
+                    while (reader.Read ())
+                    {
+                        _products.Add(new Product(){
+                            id = reader.GetInt32(0),
+                            title = reader[1].ToString(),
+                            description = reader[2].ToString(),
+                            price = reader.GetInt32(3),
+                            quantity = reader.GetInt32(4),
+                            customerId = reader.GetInt32(5),
+                            productTypeId = reader.GetInt32(6),
+                            dateCreated = reader.GetDateTime(7)
+                        });
+                    }
+                }
+            );
+            return _products;
+        }
 
         /* This method gets all Stale Products from databse
          Dependencies/FK
@@ -134,6 +156,13 @@ namespace Bangazon.Managers
         {
             _db.Insert($"DELETE FROM product WHERE productId == {id} and productId NOT IN (SELECT o.productId FROM prodorder o)");
             return true;
+        }
+        // Method for updating the product
+        // requires id of the product, column name and new value
+        // Authored by Azim
+        public void UpdateProduct(int id, string what, string value)
+        {
+            _db.Insert($"Update product set '{what}' = '{value}' where productId == {id};");
         }
         // This method gets a single Product from databse
         // requires id of the product
