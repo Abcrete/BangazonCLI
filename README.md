@@ -1,8 +1,8 @@
 # Bangazon
 
-## The Command Line Ordering System
+## The Best Command Line Ordering System
 
-In this group project, you will be allowing a user to interact with a basic product ordering database via a command line interface.
+.NET CLI that allows users to create customers, products, orders, payments, and use that data to complete orders and generate reports.
 
 ## Ordering System Interface
 
@@ -27,9 +27,24 @@ In this group project, you will be allowing a user to interact with a basic prod
 >
 ```
 
-## Requirements
+### How to install and run
 
-You will create a series of prompts that will allow the user to create various types of data in your ordering system.
+1. Clone repository from https://github.com/Abcrete/BangazonCLI.git
+3. Create and environment variable name "BANGAZON_TEST_DB" pointing to the location you would like your bangazon database.
+2. Navigate your terminal to src/Bangazon/ folder within
+3. Enter 'dotnet restore'
+4. Enter 'dotnet build'
+5. Enter 'dotnet run'
 
-1. Start with writing unit tests. As a group, determine the core functionality of the application. Define classes and methods that you think you need to build. Do that before writing the implementation code for core logic. DO NOT WRITE TESTS FOR THE USER INTERFACE (menu and prompts).
-1. All classes and methods must be fully documented.
+### Data tables and Classes
+
+1. Customer - Get all customers, add customer
+2. Product - Get all products, modify existing product, delete product
+4. Product Type - Get all product types, create new product type
+3. Payment Type - Get all payment types for a customer, add a new payment type
+5. Order - Get all orders for a customer, create order, add product to order, pay for order, get total order cost
+
+## This application consists of:
+
+1. System.ValueTuple
+2. Microsoft SQLite
