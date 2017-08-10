@@ -21,7 +21,9 @@
 7. Remove customer product
 8. Update product information
 9. Show stale products
-10. Leave Bangazon!
+10. Show customer revenue report
+11. Show popular products
+12. Leave Bangazon
 >
 ```
 
@@ -41,6 +43,7 @@
 4. Product Type - Get all product types, create new product type
 3. Payment Type - Get all payment types for a customer, add a new payment type
 5. Order - Get all orders for a customer, create order, add product to order, pay for order, get total order cost
+6. PopularProduct - Get a list of popular products based on criteria given
 
 ## This application consists of:
 
