@@ -26,6 +26,7 @@ namespace Bangazon
             ProductTypeManager prodType = new ProductTypeManager(db);
             ProductManager product = new ProductManager(db);
             OrderManager order = new OrderManager(db);
+            
 
             // int will hold active customer T.L.
             int activeCustomer = 0;
@@ -149,6 +150,9 @@ namespace Bangazon
                         } else {
                             Console.WriteLine("You must enter a customer first");
                         }
+                        break;
+                    case 11:
+                        GetPopularProducts.DoAction(product);
                         break;
                     // Return, exiting program
                     case 12: 
