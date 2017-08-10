@@ -80,7 +80,7 @@ namespace Bangazon.Managers
                             price = reader.GetInt32(3),
                             customerId = reader.GetInt32(4),
                             productTypeId = reader.GetInt32(5),
-                            dateCreated = reader.GetDateTime(7)
+                            dateCreated = reader.GetDateTime(6)
                         });
                     }
                 }
