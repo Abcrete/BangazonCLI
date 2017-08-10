@@ -88,16 +88,16 @@ namespace Bangazon.Managers
             return index;
         }
 
-        /*  Return a list that contains orderId, product name, productId, product price for all items created by the given customer
+        /*  Return a list that contains orderId, product name, quantity, product price for all items created by the given customer
             Authored by Jason Smith */
-        public List<(int, string, int, double)> RevenueReport(int custId)
+        public List<(int, int, string, double)> RevenueReport(int custId)
         {
-             List<(int orderId, string prodTitle, int prodId, double price)> _report = new List<(int, string, int, double)>();
-            _db.Query($"SELECT o.orderId, p.productId, p.title, p.price FROM [order] o LEFT JOIN prodOrder po ON po.orderId = o.orderId LEFT JOIN product p ON p.productId = po.productId WHERE p.customerId = {custId}",
+             List<(int orderId, int quantity, string prodTitle, double price)> _report = new List<(int, int, string, double)>();
+            _db.Query($"SELECT o.orderId, Count(p.productId), p.title, p.price FROM [order] o LEFT JOIN prodOrder po ON po.orderId = o.orderId LEFT JOIN product p ON p.productId = po.productId WHERE p.customerId = {custId} GROUP BY po.productId",
                 (SqliteDataReader reader) => {
                     while(reader.Read())
                     {
-                        _report.Add((reader.GetInt32(0), reader[1].ToString(), reader.GetInt32(2), reader.GetDouble(3)));
+                        _report.Add((reader.GetInt32(0), reader.GetInt32(1), reader[2].ToString(),reader.GetDouble(3)));
                     }
                 }
             );
