@@ -17,6 +17,9 @@ namespace Bangazon
         private string _connectionString;
         private SqliteConnection _connection;
 
+        /*
+            Establish a connection with the database - AJ
+         */
         public DatabaseInterface(string database)
         {
             string env = $"{Environment.GetEnvironmentVariable(database)}";
@@ -43,6 +46,7 @@ namespace Bangazon
             }
         }
 
+        //Delete records
         public void Delete(string command)
         {
             using (_connection)
@@ -74,6 +78,7 @@ namespace Bangazon
             }
         }
 
+        //Insert records
         public int Insert(string command)
         {
             int insertedItemId = 0;
@@ -102,6 +107,7 @@ namespace Bangazon
             return insertedItemId;
         }
 
+        //create Customer table
         public void CheckCustomerTable ()
         {
             using (_connection)
@@ -146,6 +152,7 @@ namespace Bangazon
             }
         }
 
+        //create Order table
         public void CheckOrderTable ()
         {
             using (_connection)
@@ -188,7 +195,7 @@ namespace Bangazon
                 _connection.Close ();
             }
         }
-
+        //create PaymentType table
         public void CheckPaymentTypeTable ()
         {
             using (_connection)
@@ -231,6 +238,7 @@ namespace Bangazon
             }
         }
 
+        //create prodorder table
         public void CheckProdOrderTable ()
         {
             using (_connection)
@@ -273,6 +281,7 @@ namespace Bangazon
             }
         }
 
+        //create producttype table
         public void CheckProductTypeTable ()
         {
             using (_connection)
@@ -312,6 +321,7 @@ namespace Bangazon
             }
         }
 
+        //cerate product table
         public void CheckProductTable ()
         {
             using (_connection)
