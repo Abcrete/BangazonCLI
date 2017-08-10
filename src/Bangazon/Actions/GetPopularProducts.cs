@@ -42,7 +42,7 @@ namespace Bangazon.Actions
               //print out headers
               Console.WriteLine("{0,-20} {1,-11} {2,-15} {3,-15}", "Product", "Orders", "Purchasers", "Revenue");
                     
-              Console.WriteLine("********************************************************************");
+              Program.Warning("********************************************************************");
               //iterate through popular products and print to console
               foreach(PopularProduct prod in popprod)
               {
@@ -56,12 +56,13 @@ namespace Bangazon.Actions
                     counter++;
                 
               }
-              Console.WriteLine("********************************************************************");
+              Program.Warning("********************************************************************");
               //print out totals
               Console.WriteLine("{0,-20} {1,-11} {2,-15} {3,-15}", "Totals:" ,ordercount,purchasercount,"$" + revenuetotal);
                     
               Console.Write ("-> Press any key to return to main menu ");
               Console.ReadKey();
+              Console.Clear();
               return;
 
          }

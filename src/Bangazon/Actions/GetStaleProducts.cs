@@ -19,7 +19,6 @@ namespace Bangazon.Actions
               List<Product> staleprod = pm.GetStaleProducts();
               if(staleprod.Count == 0) {
                 Program.Warning("There are no stale products");
-                return;
               }
 
               //Console.WriteLine(staleprod.Count);
@@ -32,8 +31,10 @@ namespace Bangazon.Actions
                     counter++;
                 
               }
+              Console.WriteLine("Press any key to return to main menu");
               Console.Write ("> ");
               Console.ReadKey();
+              Console.Clear();
          }
      }
 }

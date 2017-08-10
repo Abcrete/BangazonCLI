@@ -239,7 +239,7 @@ namespace Bangazon.Managers
             int deleted = 0;
             deleted = _db.Insert($"DELETE FROM product WHERE productId == {id} and productId NOT IN (SELECT o.productId FROM prodorder o)");
             if(deleted == 0) {
-                Console.WriteLine("Cannot delete items in an order");
+                Program.Warning("Cannot delete items in an order");
             }
             return true;
         }

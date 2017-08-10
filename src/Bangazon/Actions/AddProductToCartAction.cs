@@ -54,6 +54,7 @@ namespace Bangazon.Actions
                             var orderId = om.CreateOrder(prodId, customerId);
                         }catch(ArgumentOutOfRangeException)
                         {
+                            Console.Clear();
                             Program.Warning("Thanks for adding order to the cart!");
                         }
                     }while(choice != count);

@@ -20,6 +20,7 @@ namespace Bangazon.Actions
         {  
             // Authored by : Azim
                 int choice;
+                int counter;
                 // Main try catch block to catch the exception caused by entering incorrect character
                 try
                 {    
@@ -28,9 +29,9 @@ namespace Bangazon.Actions
                         // get all products in the system
                         // Authored by : Azim
                         Console.Clear();
+                        counter = 1;
                         // Get all the products for the customer
                         var products = pm.GetProducts(customerId);
-                        int counter = 1;
                         if(products.Count == 0) {
                             Program.Warning("Customer has no Products");
                             return;
@@ -40,6 +41,7 @@ namespace Bangazon.Actions
                         {
                             Console.WriteLine($"{counter++}. {item.title}");
                         }
+                        Console.WriteLine($"{counter}. Exit");
                         Console.Write(">");
 
                         int CustomerChoice = int.Parse(Console.ReadLine());
@@ -99,9 +101,9 @@ namespace Bangazon.Actions
                         // If out of range exception thrown this will catch it and lets the user know what is wrong
                         }catch(ArgumentOutOfRangeException)
                         {
-                            Program.Warning("Please choose only existing products!");
+                            Console.Clear();
                         }
-                    }while(choice != 0);
+                    }while(choice != 0 && choice < counter);
 
                 }catch(FormatException)
                 {

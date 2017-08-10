@@ -30,7 +30,6 @@ namespace Bangazon
 
             // int will hold active customer T.L.
             int activeCustomer = 0;
-            Console.BackgroundColor = ConsoleColor.Black;
 
 			// choice will hold the reference to the number the user selected   
             // after the MenuManager was displayed T.L.

@@ -45,7 +45,7 @@ namespace Bangazon.Actions
                     Program.Warning("Invalid entry, try again.");
                 }
             }while(choice == 0); // repeat process if input was invalid and didn't lead to a valid choice
-
+            Console.Clear();
             // take the number that was entered, minus 1 to get the index position from the list. Then Print out CustomerId and Name    T.L.
             return choice;    
         }
