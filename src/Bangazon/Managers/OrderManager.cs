@@ -25,7 +25,6 @@ namespace Bangazon.Managers
             Authored by Jason Smith */
         public int CreateOrder(int prodId, int custId)
         {
-            DateTime rightNow = DateTime.Now;
             int index = 0;
             _db.Query($"SELECT orderId FROM [order] WHERE customerId = {custId} AND paymentTypeId IS NULL", (SqliteDataReader reader) => {
                     while(reader.Read()) {
@@ -34,7 +33,7 @@ namespace Bangazon.Managers
                 }
             );
             if(index == 0) {
-                index = _db.Insert( $"INSERT INTO [order] VALUES (null, '{rightNow}', {custId}, null)");
+                index = _db.Insert( $"INSERT INTO [order] (orderId, customerId) VALUES (null, {custId})");
             }
 
             _db.Insert( $"INSERT INTO prodOrder VALUES (null, {index}, {prodId})");
@@ -44,7 +43,7 @@ namespace Bangazon.Managers
                     id = index,
                     customerId = custId,
                     paymentTypeId = null,
-                    dateCreated = rightNow
+                    dateCreated = DateTime.Now
                 }
             );
             return index;
