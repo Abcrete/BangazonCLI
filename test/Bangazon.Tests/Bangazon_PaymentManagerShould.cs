@@ -6,6 +6,10 @@ using Bangazon.Managers;
 
 namespace Bangazon.Tests
 {
+    /*
+        This method tests all the methods needed to add a payment to customer
+        Authored by: Aarti Jaisinghani
+     */
     
     public class PaymentManagerShould
     {
@@ -18,6 +22,9 @@ namespace Bangazon.Tests
             _manager = new PaymentManager(_db);  // initialize PaymentManager
         }
 
+        /*
+            This tests the AddPaymentToCustomer method 
+        */
         [Fact]
         public void CheckAddPaymentToCustomer()
         {
@@ -29,6 +36,9 @@ namespace Bangazon.Tests
 
            
         }
+        /*
+            This tests the GetPaymentsForCustomer
+         */
 
         [Fact]
         public void ListPaymentTypes()
