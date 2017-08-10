@@ -30,6 +30,7 @@ namespace Bangazon
 
             // int will hold active customer T.L.
             int activeCustomer = 0;
+            Console.BackgroundColor = ConsoleColor.Black;
 
 			// choice will hold the reference to the number the user selected   
             // after the MenuManager was displayed T.L.
@@ -67,7 +68,7 @@ namespace Bangazon
                         {
                             CreatePaymentAction.DoAction(payment, activeCustomer);
                         } else {
-                            Console.WriteLine("Please choose a customer first");
+                            Warning("Please select customer first.");
                         }
                         break;
                     // User will first be prompted to select an active customer
@@ -79,7 +80,7 @@ namespace Bangazon
                         {
                             CreateProductAction.DoAction(product, activeCustomer, productType);
                         }else {
-                            Console.WriteLine("You must choose a customer to add product to");
+                            Warning("Please select customer first.");
                         }
                         break;
                     // User will need to first select a active customer
@@ -92,7 +93,7 @@ namespace Bangazon
                         {
                             AddProductToCartAction.DoAction(order, product, activeCustomer);
                         } else {
-                            Console.WriteLine("Please choose a customer first");
+                            Warning("Please select customer first.");
                         }
                         break;
                     // User will be prompted to first choose active customer
@@ -106,7 +107,7 @@ namespace Bangazon
                         {
                             CompleteOrderAction.DoAction(activeCustomer, payment, order);
                         } else {
-                            Console.WriteLine("Please choose a customer first");
+                            Warning("Please select customer first.");
                         }
                         break;
                     // User will first be prompted to select a customer
@@ -119,7 +120,7 @@ namespace Bangazon
                         {
                             DeleteProductAction.DoAction(product, activeCustomer);
                         } else {
-                            Console.WriteLine("You must enter a customer first");
+                            Warning("Please select customer first.");
                         }
                         break;
                     // User will need to first select a active customer
@@ -132,7 +133,7 @@ namespace Bangazon
                         {
                             UpdateProduct.DoAction(product, activeCustomer);
                         } else {
-                            Console.WriteLine("You must enter a customer first");
+                            Warning("Please select customer first.");
                         }
                         break;
                     case 9:
@@ -148,7 +149,7 @@ namespace Bangazon
                         {
                             GetCustomerReport.DoAction(activeCustomer, customer, order);
                         } else {
-                            Console.WriteLine("You must enter a customer first");
+                            Warning("Please select customer first.");
                         }
                         break;
                     case 11:
@@ -159,6 +160,14 @@ namespace Bangazon
                         return;
                 }
             } while(choice != 0);
+        }
+        //  warning method for trying to do customer actions without selecting a customer
+        //  authored by Jason Smith
+        public static void Warning(string warning)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(warning);
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
 }

@@ -54,14 +54,14 @@ namespace Bangazon.Actions
                             var orderId = om.CreateOrder(prodId, customerId);
                         }catch(ArgumentOutOfRangeException)
                         {
-                            Console.WriteLine("Thanks for adding order to the cart!");
+                            Program.Warning("Thanks for adding order to the cart!");
                         }
                     }while(choice != count);
                     
                 }catch(FormatException)
                 {
                     Console.Clear();
-                    Console.WriteLine("Incorrect Input! Please enter only numbers");
+                    Program.Warning("Incorrect Input! Please enter only numbers");
                 }
         }
 

@@ -76,7 +76,7 @@ namespace Bangazon.Actions
                     isANumber = true;
                 } catch(System.FormatException) {
                     Console.Clear();
-                    Console.WriteLine("Invalid entry, try again.");
+                    Program.Warning("Invalid entry, try again.");
                     isANumber = false;
                 }
             }while (isANumber  == false);
@@ -91,7 +91,7 @@ namespace Bangazon.Actions
                     isANumber = true;
                 } catch (System.FormatException) {
                     Console.Clear();
-                    Console.WriteLine("Invalid entry, try again.");
+                    Program.Warning("Invalid entry, try again.");
                     isANumber = false;
                 }
             } while (isANumber == false);

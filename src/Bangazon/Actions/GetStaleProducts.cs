@@ -15,11 +15,11 @@ namespace Bangazon.Actions
          {
               Console.Clear();
               Console.WriteLine("List of Stale Products");
-              Console.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%");
+              Program.Warning("%%%%%%%%%%%%%%%%%%%%%%%%");
               List<Product> staleprod = pm.GetStaleProducts();
               if(staleprod.Count == 0) {
-                  Console.WriteLine("There are no stale products");
-                  return;
+                Program.Warning("There are no stale products");
+                return;
               }
 
               //Console.WriteLine(staleprod.Count);

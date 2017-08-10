@@ -32,7 +32,7 @@ namespace Bangazon.Actions
                         var products = pm.GetProducts(customerId);
                         int counter = 1;
                         if(products.Count == 0) {
-                            Console.WriteLine("Customer has no products.");
+                            Program.Warning("Customer has no Products");
                             return;
                         }
                         Console.WriteLine($"Select a product to update:");
@@ -99,14 +99,14 @@ namespace Bangazon.Actions
                         // If out of range exception thrown this will catch it and lets the user know what is wrong
                         }catch(ArgumentOutOfRangeException)
                         {
-                            Console.WriteLine("Please choose only existing products!");
+                            Program.Warning("Please choose only existing products!");
                         }
                     }while(choice != 0);
 
                 }catch(FormatException)
                 {
                     Console.Clear();
-                    Console.WriteLine("Incorrect Input! Please enter only numbers");
+                    Program.Warning("Incorrect Input! Please enter only numbers");
                 }
         }
 
