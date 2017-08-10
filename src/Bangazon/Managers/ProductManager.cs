@@ -68,7 +68,7 @@ namespace Bangazon.Managers
 
 
         public List<Product> GetProducts(){
-            _db.Query("select * from product",
+            _db.Query("SELECT prodId, title, description, price, custId, prodType, dateCreated, quant FROM (select p.createdate as dateCreated, p.productTypeId as prodType, p.customerId as custId, p.price as price, p.description as description, p.title as title, p.productId as prodId, p.quantity as quant, Count(po.productId) as tote from product p LEFT JOIN prodOrder po ON po.productId = p.productId GROUP BY po.ProductId ) WHERE quant > tote",
                 (SqliteDataReader reader) => {
                     _products.Clear();
                     while (reader.Read ())
@@ -80,7 +80,8 @@ namespace Bangazon.Managers
                             price = reader.GetInt32(3),
                             customerId = reader.GetInt32(4),
                             productTypeId = reader.GetInt32(5),
-                            dateCreated = reader.GetDateTime(7)
+                            dateCreated = reader.GetDateTime(6),
+                            quantity = reader.GetInt32(7)
                         });
                     }
                 }
@@ -101,8 +102,9 @@ namespace Bangazon.Managers
                             title = reader[1].ToString(),
                             description = reader[2].ToString(),
                             price = reader.GetInt32(3),
-                            customerId = reader.GetInt32(4),
+                            quantity = reader.GetInt32(4),
                             productTypeId = reader.GetInt32(5),
+                            customerId = reader.GetInt32(6),
                             dateCreated = reader.GetDateTime(7)
                         });
                     }
