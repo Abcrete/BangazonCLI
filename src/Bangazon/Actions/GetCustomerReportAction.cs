@@ -34,11 +34,11 @@ namespace Bangazon.Actions
                 Console.Write($"{quant}");
                 // Set a number of spaces equal to the quantity length minus 12
                 for(int i = quant.ToString().Length; i < 12; i++){Console.Write(" ");}
-                Console.Write($"${price * quant}" + Environment.NewLine);
+                Console.Write($"{String.Format("{0:C}", price * quant)}" + Environment.NewLine);
                 // calculate total sales for each item price and quantity and add to previous total
                 total += quant * price;
             }
-            Console.WriteLine(Environment.NewLine + $"Total Revenue: ${total}" + Environment.NewLine + "Press any key to return to main menu");
+            Console.WriteLine(Environment.NewLine + $"Total Revenue: {String.Format("{0:C}", total)}" + Environment.NewLine + "Press any key to return to main menu");
             Console.ReadKey();
             Console.Clear();
         }

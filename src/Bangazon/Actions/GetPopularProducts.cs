@@ -50,7 +50,7 @@ namespace Bangazon.Actions
                     ordercount += prod.orders;
                     purchasercount += prod.purchasers;
                     revenuetotal += prod.revenue;
-                    Console.WriteLine("{0,-20} {1,-11} {2,-15} {3,-15}", prod.product, prod.orders, prod.purchasers, "$" + prod.revenue);
+                    Console.WriteLine("{0,-20} {1,-11} {2,-15} {3,-15}", prod.product, prod.orders, prod.purchasers, String.Format("{0:C}", prod.revenue));
 
                     
                     counter++;
@@ -58,7 +58,7 @@ namespace Bangazon.Actions
               }
               Program.Warning("********************************************************************");
               //print out totals
-              Console.WriteLine("{0,-20} {1,-11} {2,-15} {3,-15}", "Totals:" ,ordercount,purchasercount,"$" + revenuetotal);
+              Console.WriteLine("{0,-20} {1,-11} {2,-15} {3,-15}", "Totals:" ,ordercount,purchasercount, String.Format("{0:C}", revenuetotal));
                     
               Console.Write ("-> Press any key to return to main menu ");
               Console.ReadKey();

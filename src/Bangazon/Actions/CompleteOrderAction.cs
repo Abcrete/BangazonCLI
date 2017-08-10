@@ -45,7 +45,7 @@ namespace Bangazon.Actions
             // Prompt user to choose to Y or N to complete order
             // Authored by : Jason Smith & Tamela Lerma
             do {                
-                Console.WriteLine($"Your order total is ${orderToComplete.total}. Ready to purchse");
+                Console.WriteLine($"Your order total is {String.Format("{0:C}", orderToComplete.total)}. Ready to purchse");
                 Console.Write("(Y/N) >");
                 string entry = Console.ReadKey().KeyChar.ToString().ToUpper();
                 Console.WriteLine();
