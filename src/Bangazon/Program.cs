@@ -65,11 +65,10 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             CreatePaymentAction.DoAction(payment, activeCustomer);
-                            break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
-                            break;
                         }
+                        break;
                     // User will first be prompted to select an active customer
                     // after customer is selected, a CreateProductAction Class Method is called
                     // this Method accepts 3 arguments: Instance of ProductManager, Instance of ProductTypeManager, and the stored int for CustomerId
@@ -78,12 +77,10 @@ namespace Bangazon
                         if(activeCustomer != 0)
                         {
                             CreateProductAction.DoAction(product, activeCustomer, productType);
-                            break;
-
                         }else {
                             Console.WriteLine("You must choose a customer to add product to");
-                            break;
                         }
+                        break;
                     // User will need to first select a active customer
                     // once customer is selected
                     // a Method in AddProductToCartAction is called which 
@@ -93,11 +90,10 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             AddProductToCartAction.DoAction(order, product, activeCustomer);
-                            break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
-                            break;
                         }
+                        break;
                     // User will be prompted to first choose active customer
                     // then will call Method in CompleteOrderAction which
                     // References PaymentManager and OrderManager 
@@ -108,11 +104,10 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             CompleteOrderAction.DoAction(activeCustomer, payment, order);
-                            break;
                         } else {
                             Console.WriteLine("Please choose a customer first");
-                            break;
                         }
+                        break;
                     // User will first be prompted to select a customer
                     // after customer is selected, a DeleteProductAction Class Method is called
                     // this Method accepts 2 arguments: Instance of ProductManager and the stored int for CustomerId
@@ -122,11 +117,10 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             DeleteProductAction.DoAction(product, activeCustomer);
-                            break;
                         } else {
                             Console.WriteLine("You must enter a customer first");
-                            break;
                         }
+                        break;
                     // User will need to first select a active customer
                     // once customer is selected
                     // a Method in UpdateProduct is called which 
@@ -136,15 +130,28 @@ namespace Bangazon
                         if (activeCustomer != 0)
                         {
                             UpdateProduct.DoAction(product, activeCustomer);
-                            break;
                         } else {
                             Console.WriteLine("You must enter a customer first");
-                            break;
                         }
+                        break;
                     case 9:
                         GetStaleProducts.DoAction(product);
                         break;
+                    // User will need to first select active customer
+                    // once customer is selected
+                    // a method in GetCustomerReport is called which
+                    // calls a method in OrderManger to return a report of active customer's sales
+                    // Authored by : Jason Smith
                     case 10:
+                        if (activeCustomer != 0)
+                        {
+                            GetCustomerReport.DoAction(activeCustomer, customer, order);
+                        } else {
+                            Console.WriteLine("You must enter a customer first");
+                        }
+                        break;
+                    // Return, exiting program
+                    case 12: 
                         return;
                 }
             } while(choice != 0);
