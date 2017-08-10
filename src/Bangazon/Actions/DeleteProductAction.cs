@@ -24,7 +24,7 @@ namespace Bangazon.Actions
             products = pManager.GetProducts(custId);
             // if the length of the products List is 0, then no products returned for the Customer  T.L. & J.S.
             if(products.Count == 0) {
-                Console.WriteLine("Customer Has no Products for sale");
+                Program.Warning("Customer Has no Products for sale");
                 return;
             } 
 
@@ -45,10 +45,10 @@ namespace Bangazon.Actions
                     choice = products[ProductSelected -1].id;
                 } catch(System.FormatException) {
                     Console.Clear();
-                    Console.WriteLine("Invalid entry, try again.");
+                    Program.Warning("Invalid entry, try again.");
                 } catch(System.ArgumentOutOfRangeException) {
                     Console.Clear();
-                    Console.WriteLine("Invalid entry, try again.");
+                    Program.Warning("Invalid entry, try again.");
                 }
             }while(choice == 0);
             // choice will pass in Product Id to Method in ProductManager to remove T.L.

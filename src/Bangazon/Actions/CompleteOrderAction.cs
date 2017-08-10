@@ -23,7 +23,7 @@ namespace Bangazon.Actions
             // First, check to make sure Customer has an open Order
             // If no order , prompt user to add Products and return to Main Menu    J.S. & T.L.
             if (orderToComplete.id == 0) {
-                Console.WriteLine("Please add some products to your order first. Press any key to return to Main Menu");
+                Program.Warning("Please add some products to your order first. Press any key to return to Main Menu");
                 Console.ReadKey();
                 return;
             }
@@ -34,7 +34,7 @@ namespace Bangazon.Actions
             List<PaymentType> payment = pm.GetPaymentsForCustomer(custId);
             if (payment.Count == 0)
             {
-                Console.WriteLine("No payment types, press any key to add payment method");
+                Program.Warning("No payment types, press any key to add payment method");
                 Console.ReadKey();
                 CreatePaymentAction.DoAction(pm, custId);
                 payment = pm.GetPaymentsForCustomer(custId);
@@ -76,12 +76,12 @@ namespace Bangazon.Actions
                             om.AddPayment(choice, orderToComplete.id);
                         } catch (System.FormatException) {
                             Console.Clear();
-                            Console.WriteLine("Invalid entry Please try again");
+                            Program.Warning("Invalid entry Please try again");
                         } catch (System.ArgumentOutOfRangeException) {
                             // set choice back to 0 so loop will continue if invalid entry
                             choice = 0;
                             Console.Clear();
-                            Console.WriteLine("Invalid entry Please try again");
+                            Program.Warning("Invalid entry Please try again");
                         }
                     } while (choice == 0);
                 // if User chooses N will be redirected to Main Menu
@@ -89,7 +89,7 @@ namespace Bangazon.Actions
                     return;
                 } else {
                     Console.Clear();
-                    Console.WriteLine("Invalid Entry, Please try again");
+                    Program.Warning("Invalid Entry, Please try again");
                 }
             } while (choice == 0);   
         }

@@ -6,18 +6,25 @@ namespace Bangazon.Managers
 {
     // Class that displays Menu in Console
     // Authored by : Tamela Lerma
-    public class MenuManager {
+    public class MenuManager
+    {
 
         // Method will return the number that user entered
         // that number will then be used in switch statement in Program.cs file
         // Authored by : Tamela Lerma
-        public int ShowMenu() {
+        public int ShowMenu()
+        {
 
             int choice = 0;
-            do{
+            do
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("*************************************************");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("Welcome to Bangazon! Command Line Ordering System");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("*************************************************");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Create a customer account");
                 Console.WriteLine("2. Choose active customer");
                 Console.WriteLine("3. Create a payment option for a customer");
@@ -35,13 +42,16 @@ namespace Bangazon.Managers
                 // Capture key char that was entered
                 String enteredKey = Console.ReadLine();
                 Console.WriteLine("");
-                try {
+                try
+                {
                     choice = int.Parse(enteredKey);
-                } catch(System.FormatException) {
+                }
+                catch (System.FormatException)
+                {
                     Console.Clear();
                     Console.WriteLine("Invalid entry, try again.");
                 }
-            } while(choice == 0);
+            } while (choice == 0);
             return choice;
         }
     }

@@ -39,10 +39,10 @@ namespace Bangazon.Actions
                     choice = customers[CustomerChoice - 1].CustomerId;
                 } catch(System.FormatException) {
                     Console.Clear();
-                    Console.WriteLine("Invalid entry, try again.");
+                    Program.Warning("Invalid entry, try again.");
                 } catch(System.ArgumentOutOfRangeException) {
                     Console.Clear();
-                    Console.WriteLine("Invalid entry, try again.");
+                    Program.Warning("Invalid entry, try again.");
                 }
             }while(choice == 0); // repeat process if input was invalid and didn't lead to a valid choice
 
