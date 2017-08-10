@@ -68,7 +68,7 @@ namespace Bangazon.Managers
 
 
         public List<Product> GetProducts(){
-            _db.Query("select * from product",
+            _db.Query("SELECT prodId, title, description, price, custId, prodType, dateCreated FROM (select p.createdate as dateCreated, p.productTypeId as prodType, p.customerId as custId, p.price as price, p.description as description, p.title as title, p.productId as prodId, p.quantity as quant, Count(po.productId) as tote from product p LEFT JOIN prodOrder po ON po.productId = p.productId GROUP BY po.ProductId ) WHERE quant > tote",
                 (SqliteDataReader reader) => {
                     _products.Clear();
                     while (reader.Read ())
