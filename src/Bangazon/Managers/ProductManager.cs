@@ -169,6 +169,67 @@ namespace Bangazon.Managers
             );
             return _staleproducts;
         }
+        /*
+        This method returns top 3 most popular products
+
+        Given a user wants to see the most popular products in the system
+        When the user selects the corresponding option from the main menu
+        Then the user should see the following report
+
+        Product             Orders      Purchasers    Revenue
+        *******************************************************
+        AA Batteries        100         20            $990.90 
+        Diapers             50          10            $640.95
+        Case of Cracking... 40          30            $270.96
+        *******************************************************
+        Totals:             190         60            $1,902.81
+
+        -> Press any key to return to main menu
+        User will see the top 3 revenue generating products
+        The product column must be 20 characters wide, and will display a maximum of 18 characters for the product name.
+        The orders column must be 11 characters wide.
+        The purchasers column must be 15 characters wide.
+        The revenue column must be 15 characters wide.
+         */
+
+         //this method returns a list of type PopularProduct
+        public List<PopularProduct> GetPopularProducts(){
+            List<PopularProduct> _popproducts = new List<PopularProduct>();
+            _db.Query(@"select x.productid, x.prodname, z.ordercount, y.purchasers, x.price*x.productcount as revenue
+                    from
+                    (select count(*) as productcount, w.productid as productid, w.productname as prodname, w.price as price
+                    from (select po.prodorderid as id, po.orderid as orderid,  po.productid as productid, p.title as productname, p.price as price, o.customerid as customer
+                    from prodorder po join product p
+                    on po.productid=p.productid
+                    join [order] o on o.orderid=po.orderid
+                    join customer c on c.customerid=o.customerid) w
+                    group by w.productid) x
+                    join 
+                    (select count(*) as ordercount, productid from prodorder
+                    group by productid) z
+                    on x.productid = z.productid
+                    join 
+                    (select count(*) as purchasers , po.productid from prodorder po
+                    join `order` o on o.orderid=po.orderid
+                    group by po.productid) y 
+                    on y.productid = z.productid
+                    order by revenue desc
+                    limit 3",
+                (SqliteDataReader reader) => {
+                    while (reader.Read ())
+                    {
+                        _popproducts.Add(new PopularProduct(){
+                            id = reader.GetInt32(0),
+                            product = reader[1].ToString(),
+                            orders = reader.GetInt32(2),
+                            purchasers = reader.GetInt32(3),
+                            revenue = reader.GetDouble(4)
+                        });
+                    }
+                }
+            );
+            return _popproducts;
+        }
         
         // This method removes a product if it is not added to the order yet
         // requires id of the product
