@@ -95,9 +95,10 @@ namespace Bangazon.Actions
                     isANumber = false;
                 }
             } while (isANumber == false);
-          
+            Console.Clear();
             // Call Method from ProductManager Class and pass in new Product Object to be added to DB  T.L. 
             prodManager.AddProduct(product);
+            Program.Warning("Product added.");
         }
     }
 }
